@@ -80,13 +80,13 @@ public class DBQuery{
         // can I run a query on reservation table that select all teh rows with customerID comes from co
 
         Flight f1 = new Flight();
-        f1.setAirline("BoBo Airline 001");
+        f1.setAirline("a");
 
         Flight f2 = new Flight();
-        f2.setAirline("BoBo Airline 002");
+        f2.setAirline("b");
 
         Flight f3 = new Flight();
-        f3.setAirline("Bobo Airline 003");
+        f3.setAirline("c");
 
         customer.getFlights().add(f1);
         customer.getFlights().add(f2);
@@ -193,7 +193,7 @@ public class DBQuery{
             // Create a statement
             switch (f1.getAction()){
 
-                case gsu.common.Action.FLIGHT_DEPARTURE:
+                case edu.gsu.common.Action.FLIGHT_DEPARTURE:
                     ptmt = conn.prepareStatement(Query.FLIGHT_DEPARTURE);
                     ptmt.setString(1, f1.getDeparture());
                     break;

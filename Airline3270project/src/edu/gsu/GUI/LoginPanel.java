@@ -24,42 +24,42 @@ public class LoginPanel extends JPanel {
 
     public LoginPanel(){
 
-        setPreferredSize(new Dimension(300, 200));
-        setBackground(Color.WHITE);
-        setLayout(null);
+        //setPreferredSize(new Dimension(300, 200));
+        //setBackground(Color.WHITE);
+        //setLayout(null);
 
-        login = new JButton("Login");
-        register = new JButton("Register");
-        username = new JLabel("Username: ");
-        password = new JLabel("Password: ");
-        forgot = new JButton("Forgot my password");
-        usnText = new JTextField(25);
-        pswText = new JPasswordField(25);
+        //login = new JButton("Login");
+        //register = new JButton("Register");
+        //username = new JLabel("Username: ");
+        //password = new JLabel("Password: ");
+        //forgot = new JButton("Forgot my password");
+        //usnText = new JTextField(25);
+        //pswText = new JPasswordField(25);
 
-        username.setBounds(20, 30, 75, 20);
-        add(username);
+        //username.setBounds(20, 30, 75, 20);
+        //add(username);
 
-        usnText.setBounds(105, 30, 150, 20);
-        add(usnText);
+        //usnText.setBounds(105, 30, 150, 20);
+        //add(usnText);
 
-        password.setBounds(20, 65, 75, 20);
-        add(password);
+        //password.setBounds(20, 65, 75, 20);
+        //add(password);
 
-        pswText.setBounds(105, 65, 150, 20);
-        add(pswText);
+        //pswText.setBounds(105, 65, 150, 20);
+        //add(pswText);
 
-        login.setBounds(55, 100, 85, 20);
-        add(login);
+        //login.setBounds(55, 100, 85, 20);
+        //add(login);
 
-        register.setBounds(155, 100, 85, 20);
-        add(register);
+        //register.setBounds(155, 100, 85, 20);
+        //add(register);
 
-        forgot.setBounds(55, 135, 185, 20);
-        add(forgot);
+        //forgot.setBounds(55, 135, 185, 20);
+        //add(forgot);
 
-        login.addActionListener(new ButtonListener());
-        register.addActionListener(new ButtonListener());
-        forgot.addActionListener(new ButtonListener());
+        //login.addActionListener(new ButtonListener());
+        //register.addActionListener(new ButtonListener());
+        //forgot.addActionListener(new ButtonListener());
 
 
 

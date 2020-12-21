@@ -58,7 +58,6 @@ public class StartingPanel extends Application{
 		PasswordField pfpsw = new PasswordField();
 		
 		Button btLogin = new Button("Login");
-		btLogin.setMinSize(25, 20);
 		Button btRegi = new Button("Register");
 		Button btFgot = new Button("Forgot Password");
 		

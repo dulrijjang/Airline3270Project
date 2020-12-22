@@ -1,177 +1,185 @@
 package edu.gsu.GUI;
 
-import edu.gsu.common.Customer;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.Random;
-
 import static edu.gsu.bizlogic.BizLogicProcess.process;
 
-public class RegisterPanel extends JPanel {
+import java.util.Random;
 
-    private Customer c1 = new Customer();
+import edu.gsu.common.Customer;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-    private JButton create;
-    private JLabel username ;
-    private JLabel password;
-    private JLabel firstName;
-    private JLabel lastName;
-    private JLabel email;
-    private JLabel address;
-    private JLabel zip;
-    private JLabel state;
-    private JLabel ssn;
-    private JLabel securityQ;
-    private JLabel securityA;
-    private JTextField usnText;
-    private JTextField pswText;
-    private JTextField firstNameTxt;
-    private JTextField lastNameTxt;
-    private JTextField emailTxt;
-    private JTextField addressTxt;
-    private JTextField zipTxt;
-    private JTextField stateTxt;
-    private JTextField ssnTxt;
-    private JTextField securityQTxt;
-    private JTextField securityATxt;
-    private int royaltyNumber;
+public class RegisterPanel extends Application {
+	
+	 private Customer c1 = new Customer();
+	 
+	 Image image = new Image("flight.jpg");
+	 BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+	 Background bg = new Background(bgi);
+	 
+	 Stage window;
+	 Button btCreate;
+	 Button btBack;
+	 Label username ;
+	 Label password;
+	 Label firstName;
+	 Label lastName;
+	 Label email;
+	 Label address;
+	 Label zip;
+	 Label state;
+	 Label ssn;
+	 Label securityQ;
+	 Label securityA;
+	 TextField usnText;
+	 PasswordField pswText;
+	 TextField fnText;
+	 TextField lnText;
+	 TextField emText;
+     TextField addText;
+	 TextField zipText;
+	 TextField stateText;
+	 TextField ssnText;
+	 TextField sqText;
+	 TextField saText;
+	 TextField royaltyNumber;
 
-    public RegisterPanel(){
+    public RegisterPanel() {
 
-        setPreferredSize(new Dimension(400, 450));
-        setBackground(Color.WHITE);
-        setLayout(null);
+      
+    }
+ 
+    public void regiInput (ActionEvent event) {
 
-        create = new JButton("Create Account");
-        create.addActionListener(new RegisterPanel.ButtonListener());
+            Random rand = new Random();
+            String royaltyNumber = rand.nextInt(10000) + "";
 
-        username = new JLabel("Username: ");
-        password = new JLabel("Password: ");
-        firstName = new JLabel("First name: ");
-        lastName = new JLabel("Last name: ");
-        email = new JLabel("E-mail: ");
-        address = new JLabel("Street address: ");
-        zip = new JLabel("ZIP Code: ");
-        state = new JLabel("State: ");
-        ssn = new JLabel("SSN: ");
-        securityQ = new JLabel("Security Question: ");
-        securityA = new JLabel("Answer: ");
+            c1.setRoyaltyNumber(royaltyNumber); // royaltyNumber;
+            c1.setFirstName(fnText.getText()); // firstName;
+            c1.setLastName(lnText.getText()); // lastName;
+            c1.setLoginID(usnText.getText()); // loginID;
+            c1.setPassword(pswText.getText()); // password;
+            c1.setEmail(emText.getText()); // email;
+            c1.setAddress(addText.getText()); // address;
+            c1.setZip(zipText.getText()); // zip;
+            c1.setState(stateText.getText()); //state;
+            c1.setSSN(ssnText.getText()); //ssn;
+            c1.setSecurityQ(sqText.getText()); // securityQ;
+            c1.setSecurityA(saText.getText()); // securityA;
 
-        usnText = new JTextField(200);
-        pswText = new JTextField(200);
-        firstNameTxt = new JTextField(200);
-        lastNameTxt = new JTextField(200);
-        emailTxt = new JTextField(200);
-        addressTxt = new JTextField(200);
-        zipTxt = new JTextField(200);
-        stateTxt = new JTextField(200);
-        ssnTxt = new JTextField(200);
-        securityQTxt = new JTextField(300);
-        securityATxt = new JTextField(300);
+            c1.setAction("register");
 
-        username.setBounds(20, 30, 75, 20);
-        add(username);
-
-        usnText.setBounds(150, 30, 200, 20);
-        add(usnText);
-
-        password.setBounds(20, 60, 75, 20);
-        add(password);
-
-        pswText.setBounds(150, 60, 200, 20);
-        add(pswText);
-
-        firstName.setBounds(20, 90, 75, 20);
-        add(firstName);
-
-        firstNameTxt.setBounds(150, 90, 200, 20);
-        add(firstNameTxt);
-
-        lastName.setBounds(20, 120, 75, 20);
-        add(lastName);
-
-        lastNameTxt.setBounds(150, 120, 200, 20);
-        add(lastNameTxt);
-
-        email.setBounds(20, 150, 75, 20);
-        add(email);
-
-        emailTxt.setBounds(150, 150, 200, 20);
-        add(emailTxt);
-
-        address.setBounds(20, 180, 100, 20);
-        add(address);
-
-        addressTxt.setBounds(150, 180, 200, 20);
-        add(addressTxt);
-
-        zip.setBounds(20, 210, 75, 20);
-        add(zip);
-
-        zipTxt.setBounds(150, 210, 200, 20);
-        add(zipTxt);
-
-        state.setBounds(20, 240, 75, 20);
-        add(state);
-
-        stateTxt.setBounds(150, 240, 200, 20);
-        add(stateTxt);
-
-        ssn.setBounds(20, 270, 75, 20);
-        add(ssn);
-
-        ssnTxt.setBounds(150, 270, 200, 20);
-        add(ssnTxt);
-
-        securityQ.setBounds(20, 300, 120, 20);
-        add(securityQ);
-
-        securityQTxt.setBounds(150, 300, 200, 20);
-        add(securityQTxt);
-
-        securityA.setBounds(20, 330, 100, 20);
-        add(securityA);
-
-        securityATxt.setBounds(150, 330, 200, 20);
-        add(securityATxt);
-
-        create.setBounds(100, 375, 200, 25);
-        add(create);
-
+            try {
+                process(c1);
+            } 
+            
+            catch (Exception e) {
+               e.printStackTrace();
+            }
 
     }
-    private class ButtonListener implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent event) {
-
-                Random rand = new Random();
-                String royaltyNumber = rand.nextInt(10000) + "";
-
-                c1.setRoyaltyNumber(royaltyNumber); // royaltyNumber;
-                c1.setFirstName(firstNameTxt.getText()); // firstName;
-                c1.setLastName(lastNameTxt.getText()); // lastName;
-                c1.setLoginID(usnText.getText()); // loginID;
-                c1.setPassword(pswText.getText()); // password;
-                c1.setEmail(emailTxt.getText()); // email;
-                c1.setAddress(addressTxt.getText()); // address;
-                c1.setZip(zipTxt.getText()); // zip;
-                c1.setState(stateTxt.getText()); //state;
-                c1.setSSN(ssnTxt.getText()); //ssn;
-                c1.setSecurityQ(securityQTxt.getText()); // securityQ;
-                c1.setSecurityA(securityATxt.getText()); // securityA;
-
-                c1.setAction("register");
-
-                try {
-                    process(c1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-        }
-
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+    	
+    	window = primaryStage;
+    	window.setTitle("BoBo Air Registration");
+    	
+    	username = new Label("LoginID:");
+    	password = new Label("Password:");
+    	firstName = new Label("First Name:");
+    	lastName = new Label("Last Name:");
+    	email = new Label("Email:");
+    	address = new Label("Address:");
+    	zip = new Label("ZIP Code:");
+    	state = new Label("State:");
+    	ssn = new Label("SSN:");
+    	securityQ = new Label("Security Question:");
+    	securityA = new Label("Security Answer:");
+    	
+    	usnText = new TextField();
+    	pswText = new PasswordField();
+    	fnText = new TextField();
+    	lnText = new TextField();
+    	emText = new TextField();
+    	addText = new TextField();
+    	zipText = new TextField();
+    	stateText = new TextField();
+    	ssnText = new TextField();
+    	sqText = new TextField();
+    	saText = new TextField();
+    	royaltyNumber = new TextField();
+    	
+    	btCreate = new Button("Create");
+    	btCreate.setOnAction(e-> {
+    	
+    		RegisterPanel rp = new RegisterPanel();
+    		rp.regiInput(e);	
+    				
+    	});
+    	
+    	btBack = new Button("Back");
+    	
+    	
+    	GridPane grid = new GridPane();
+    	grid.setAlignment(Pos.CENTER);
+    	grid.setPadding(new Insets(10,10,10,10));
+    	grid.setHgap(15);
+    	grid.setVgap(15);
+    	GridPane.setConstraints(username, 0, 0);
+    	GridPane.setConstraints(usnText, 1, 0);
+    	GridPane.setConstraints(password, 0, 1);
+    	GridPane.setConstraints(pswText, 1, 1);
+    	GridPane.setConstraints(firstName, 0, 2);
+    	GridPane.setConstraints(fnText, 1, 2);
+    	GridPane.setConstraints(lastName, 0, 3);
+    	GridPane.setConstraints(lnText, 1, 3);
+    	GridPane.setConstraints(email, 0, 4);
+    	GridPane.setConstraints(emText, 1, 4);
+    	GridPane.setConstraints(address, 0, 5);
+    	GridPane.setConstraints(addText, 1, 5);
+    	GridPane.setConstraints(zip, 0, 6);
+    	GridPane.setConstraints(zipText, 1, 6);
+    	GridPane.setConstraints(state, 0, 7);
+    	GridPane.setConstraints(stateText, 1, 7);
+    	GridPane.setConstraints(ssn, 0, 8);
+    	GridPane.setConstraints(ssnText, 1, 8);
+    	GridPane.setConstraints(securityQ, 0, 9);
+    	GridPane.setConstraints(sqText, 1, 9);
+    	GridPane.setConstraints(securityA, 0, 10);
+    	GridPane.setConstraints(saText, 1, 10);
+    	GridPane.setConstraints(btCreate, 0, 11);
+    	GridPane.setConstraints(btBack, 1, 11);
+    	
+    	grid.getChildren().addAll(username,usnText,password,pswText,firstName,fnText,lastName,lnText,email,emText,email,emText,address,addText,
+    			zip,zipText,state,stateText,ssn,ssnText,securityQ,sqText,securityA,saText,btCreate,btBack);
+    	
+    	Scene scene1 = new Scene(grid, 800, 600);
+    	grid.setBackground(bg);
+    	
+    	window.setScene(scene1);
+    	window.show();
+	
     }
+	
+    public void main(String [] args) {
+    	
+    	launch(args);
+    	
+    }
+  
 }

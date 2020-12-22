@@ -19,21 +19,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class StartingPanel extends Application{
+public class StartingPanel extends Application {
 	
 	Stage window;
 	Image image = new Image("flight2.jpg");
 	BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	Background bg = new Background(bgi);
 	
+	Button btLogin;
+	Button btRegi;
+	Button btFgot;
+	TextField tfname;
+	PasswordField pfpsw;
+	
     public static void main(String[] args) {
-
-        //JFrame frame = new JFrame("BoBo Tour Login");
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //LoginPanel panel = new LoginPanel();
-        //frame.getContentPane().add(panel);
-        //frame.pack();
-        //frame.setVisible(true);
     	
     	launch(args);
 
@@ -54,12 +53,38 @@ public class StartingPanel extends Application{
 		lpsw.setStyle("-fx-text-fill: Black;");
 		
 		
-		TextField tfname = new TextField();
-		PasswordField pfpsw = new PasswordField();
+		tfname = new TextField();
+		pfpsw = new PasswordField();
 		
-		Button btLogin = new Button("Login");
-		Button btRegi = new Button("Register");
-		Button btFgot = new Button("Forgot Password");
+		btLogin = new Button("Login");
+		btLogin.setOnAction(e-> {
+			
+			LoginPanel lp = new LoginPanel();
+			
+			lp.btLoginAction(e);
+			
+		});
+		
+		btRegi = new Button("Register");
+		btRegi.setOnAction(e-> {
+			
+			RegisterPanel rp = new RegisterPanel();
+			
+			try {
+				rp.start(window);
+			} 
+			catch (Exception e1) {
+				
+				e1.printStackTrace();
+			}
+			
+		});
+		
+		
+		
+		
+		
+		btFgot = new Button("Forgot Password");
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
@@ -82,5 +107,7 @@ public class StartingPanel extends Application{
 		window.setScene(scene1);
 		window.show();
 	}
+
+	
 
 }

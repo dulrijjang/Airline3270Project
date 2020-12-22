@@ -12,11 +12,11 @@ import javax.swing.*;
 
 
 public class DBQuery{
-
-    private static String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static String MYSQL_URL = "jdbc:mysql://127.0.0.1:3306/registration?user=root?iseTimezone=true&serverTimezone=UTC";
-    private static String MYSQL_USN = "root";
-    private static String MYSQL_PSW = "Snowy2626!";
+	
+    private static String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static String URL = "jdbc:mysql://localhost:3306/?user=root?iseTimezone=true&serverTimezone=UTC";
+    private static String USN = "root";
+    private static String PSW = "Xkwhdkf1@";
 
     private Connection con;
     private static PreparedStatement ptmt;
@@ -28,8 +28,8 @@ public class DBQuery{
 
         try {
 
-            Class.forName(MYSQL_DRIVER);
-            conn = DriverManager.getConnection(MYSQL_URL,MYSQL_USN,MYSQL_PSW);
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL,USN,PSW);
             System.out.println("Connected");
 
             // Create a statement
@@ -101,10 +101,10 @@ public class DBQuery{
 
         try {
 
-            Class.forName(MYSQL_DRIVER);
+            Class.forName(DRIVER);
             System.out.println("driver found");
 
-            conn = DriverManager.getConnection(MYSQL_URL,MYSQL_USN,MYSQL_PSW);
+            conn = DriverManager.getConnection(URL,USN,PSW);
             System.out.println("Connected");
 
 
@@ -146,8 +146,8 @@ public class DBQuery{
 
         try {
 
-            Class.forName(MYSQL_DRIVER);
-            conn = DriverManager.getConnection(MYSQL_URL,MYSQL_USN,MYSQL_PSW);
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL,USN,PSW);
             System.out.println("Connected");
 
             // Create a statement
@@ -186,8 +186,8 @@ public class DBQuery{
 
         try {
 
-            Class.forName(MYSQL_DRIVER);
-            conn = DriverManager.getConnection(MYSQL_URL,MYSQL_USN,MYSQL_PSW);
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL,USN,PSW);
             System.out.println("Connected");
 
             // Create a statement

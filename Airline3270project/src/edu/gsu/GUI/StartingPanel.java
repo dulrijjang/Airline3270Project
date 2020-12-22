@@ -24,7 +24,7 @@ public class StartingPanel extends Application {
 	
 	Stage window;
 	public static Scene scene1;
-	Image image = new Image("flight2.jpg");
+	Image image = new Image("flight.jpg");
 	BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	Background bg = new Background(bgi);
 	

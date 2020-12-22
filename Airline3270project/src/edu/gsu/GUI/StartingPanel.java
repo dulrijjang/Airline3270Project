@@ -71,7 +71,7 @@ public class StartingPanel extends Application {
 			RegisterPanel rp = new RegisterPanel();
 			
 			try {
-				rp.start(window);
+				rp.start(primaryStage);
 			} 
 			catch (Exception e1) {
 				

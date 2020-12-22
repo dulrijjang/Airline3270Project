@@ -133,6 +133,11 @@ public class RegisterPanel extends Application {
     	});
     	
     	btBack = new Button("Back");
+    	btBack.setOnAction(e-> {
+    		
+    		Stage stage = (Stage) btBack.getScene().getWindow();
+    		
+    	});
     	
     	
     	GridPane grid = new GridPane();
@@ -165,7 +170,7 @@ public class RegisterPanel extends Application {
     	GridPane.setConstraints(btCreate, 0, 11);
     	GridPane.setConstraints(btBack, 1, 11);
     	
-    	grid.getChildren().addAll(username,usnText,password,pswText,firstName,fnText,lastName,lnText,email,emText,email,emText,address,addText,
+    	grid.getChildren().addAll(username,usnText,password,pswText,firstName,fnText,lastName,lnText,email,emText,address,addText,
     			zip,zipText,state,stateText,ssn,ssnText,securityQ,sqText,securityA,saText,btCreate,btBack);
     	
     	Scene scene1 = new Scene(grid, 800, 600);

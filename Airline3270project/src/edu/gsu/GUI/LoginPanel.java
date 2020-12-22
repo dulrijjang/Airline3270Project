@@ -31,7 +31,6 @@ public class LoginPanel extends Application {
 	
 	Stage window;
 	
-	
 	StartingPanel sp = new StartingPanel();
 	
     private Customer c1 = new Customer();

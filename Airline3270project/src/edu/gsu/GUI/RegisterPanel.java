@@ -181,10 +181,9 @@ public class RegisterPanel extends Application {
 
         Random rand = new Random();
         String royaltyNumber = rand.nextInt(10000) + "";
-        String fn = fnText.getText() + "";
 
         c1.setRoyaltyNumber(royaltyNumber); 
-        c1.setFirstName(fn); 
+        c1.setFirstName(fnText.getText()); 
         c1.setLastName(lnText.getText()); 
         c1.setLoginID(usnText.getText()); 
         c1.setPassword(pswText.getText()); 

@@ -6,7 +6,6 @@ import java.util.Random;
 
 import edu.gsu.common.Customer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -47,54 +46,25 @@ public class RegisterPanel extends Application {
 	 Label ssn;
 	 Label securityQ;
 	 Label securityA;
-	 TextField usnText;
-	 PasswordField pswText;
-	 TextField fnText;
-	 TextField lnText;
-	 TextField emText;
-     TextField addText;
-	 TextField zipText;
-	 TextField stateText;
-	 TextField ssnText;
-	 TextField sqText;
-	 TextField saText;
-	 TextField royaltyNumber;
+	 
+	 TextField usnText; 
+ 	 PasswordField pswText;
+ 	 TextField fnText;
+ 	 TextField lnText;
+ 	 TextField emText; 
+ 	 TextField addText;
+ 	 TextField zipText;
+ 	 TextField stateText;
+ 	 TextField ssnText;
+ 	 TextField sqText;
+ 	 TextField saText;
 
     public RegisterPanel() {
 
       
     }
  
-    public void regiInput (ActionEvent event) {
-
-            Random rand = new Random();
-            String royaltyNumber = rand.nextInt(10000) + "";
-
-            c1.setRoyaltyNumber(royaltyNumber); 
-            c1.setFirstName(fnText.getText()); 
-            c1.setLastName(lnText.getText()); 
-            c1.setLoginID(usnText.getText()); 
-            c1.setPassword(pswText.getText()); 
-            c1.setEmail(emText.getText()); 
-            c1.setAddress(addText.getText()); 
-            c1.setZip(zipText.getText()); 
-            c1.setState(stateText.getText()); 
-            c1.setSSN(ssnText.getText()); 
-            c1.setSecurityQ(sqText.getText()); 
-            c1.setSecurityA(saText.getText()); 
-
-            c1.setAction("register");
-
-            try {
-                process(c1);
-            } 
-            
-            catch (Exception e) {
-               e.printStackTrace();
-            }
-
-    }
-
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
     	
@@ -146,13 +116,12 @@ public class RegisterPanel extends Application {
     	ssnText = new TextField();
     	sqText = new TextField();
     	saText = new TextField();
-    	royaltyNumber = new TextField();
     	
     	btCreate = new Button("Create");
     	btCreate.setOnAction(e-> {
     	
     		RegisterPanel rp = new RegisterPanel();
-    		rp.regiInput(e);	
+    		rp.regiInput();	
     				
     	});
     	
@@ -207,6 +176,42 @@ public class RegisterPanel extends Application {
   
 	
     }
+    
+    public void regiInput () {
+
+        Random rand = new Random();
+        String royaltyNumber = rand.nextInt(10000) + "";
+        String fn = fnText.getText() + "";
+
+        c1.setRoyaltyNumber(royaltyNumber); 
+        c1.setFirstName(fn); 
+        c1.setLastName(lnText.getText()); 
+        c1.setLoginID(usnText.getText()); 
+        c1.setPassword(pswText.getText()); 
+        c1.setEmail(emText.getText()); 
+        c1.setAddress(addText.getText()); 
+        c1.setZip(zipText.getText()); 
+        c1.setState(stateText.getText()); 
+        c1.setSSN(ssnText.getText()); 
+        c1.setSecurityQ(sqText.getText()); 
+        c1.setSecurityA(saText.getText());
+        c1.setAction("register");
+
+        try {
+        	
+            process(c1);
+            
+        } 
+        
+        catch (Exception e) {
+        	
+           e.printStackTrace();
+           
+        }
+
+    }
+
+    
 	
     public void main(String [] args) {
     	

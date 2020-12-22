@@ -21,7 +21,9 @@ import javafx.stage.Stage;
 
 public class StartingPanel extends Application {
 	
+	
 	Stage window;
+	public static Scene scene1;
 	Image image = new Image("flight2.jpg");
 	BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	Background bg = new Background(bgi);
@@ -101,7 +103,7 @@ public class StartingPanel extends Application {
 		
 		grid.getChildren().addAll(lname,lpsw,tfname,pfpsw,btLogin,btRegi,btFgot);
 		
-		Scene scene1 = new Scene(grid, 600, 400);
+		scene1 = new Scene(grid, 600, 400);
 		grid.setBackground(bg);
 		
 		window.setScene(scene1);

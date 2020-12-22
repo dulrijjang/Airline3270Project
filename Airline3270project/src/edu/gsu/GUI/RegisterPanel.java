@@ -21,13 +21,15 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class RegisterPanel extends Application {
 	
 	 private Customer c1 = new Customer();
 	 
-	 Image image = new Image("flight.jpg");
+	 Image image = new Image("flight2.jpg");
 	 BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	 Background bg = new Background(bgi);
 	 
@@ -68,18 +70,18 @@ public class RegisterPanel extends Application {
             Random rand = new Random();
             String royaltyNumber = rand.nextInt(10000) + "";
 
-            c1.setRoyaltyNumber(royaltyNumber); // royaltyNumber;
-            c1.setFirstName(fnText.getText()); // firstName;
-            c1.setLastName(lnText.getText()); // lastName;
-            c1.setLoginID(usnText.getText()); // loginID;
-            c1.setPassword(pswText.getText()); // password;
-            c1.setEmail(emText.getText()); // email;
-            c1.setAddress(addText.getText()); // address;
-            c1.setZip(zipText.getText()); // zip;
-            c1.setState(stateText.getText()); //state;
-            c1.setSSN(ssnText.getText()); //ssn;
-            c1.setSecurityQ(sqText.getText()); // securityQ;
-            c1.setSecurityA(saText.getText()); // securityA;
+            c1.setRoyaltyNumber(royaltyNumber); 
+            c1.setFirstName(fnText.getText()); 
+            c1.setLastName(lnText.getText()); 
+            c1.setLoginID(usnText.getText()); 
+            c1.setPassword(pswText.getText()); 
+            c1.setEmail(emText.getText()); 
+            c1.setAddress(addText.getText()); 
+            c1.setZip(zipText.getText()); 
+            c1.setState(stateText.getText()); 
+            c1.setSSN(ssnText.getText()); 
+            c1.setSecurityQ(sqText.getText()); 
+            c1.setSecurityA(saText.getText()); 
 
             c1.setAction("register");
 
@@ -100,16 +102,38 @@ public class RegisterPanel extends Application {
     	window.setTitle("BoBo Air Registration");
     	
     	username = new Label("LoginID:");
+    	username.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	username.setStyle("-fx-text-fill: Black;");
     	password = new Label("Password:");
+    	password.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	password.setStyle("-fx-text-fill: Black;");
     	firstName = new Label("First Name:");
+    	firstName.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	firstName.setStyle("-fx-text-fill: Black;");
     	lastName = new Label("Last Name:");
+    	lastName.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	lastName.setStyle("-fx-text-fill: Black;");
     	email = new Label("Email:");
+    	email.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	email.setStyle("-fx-text-fill: Black;");
     	address = new Label("Address:");
+    	address.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	address.setStyle("-fx-text-fill: Black;");
     	zip = new Label("ZIP Code:");
+    	zip.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	zip.setStyle("-fx-text-fill: Black;");
     	state = new Label("State:");
+    	state.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	state.setStyle("-fx-text-fill: Black;");
     	ssn = new Label("SSN:");
+    	ssn.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	ssn.setStyle("-fx-text-fill: Black;");
     	securityQ = new Label("Security Question:");
+    	securityQ.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	securityQ.setStyle("-fx-text-fill: Black;");
     	securityA = new Label("Security Answer:");
+    	securityA.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
+    	securityA.setStyle("-fx-text-fill: Black;");
     	
     	usnText = new TextField();
     	pswText = new PasswordField();
@@ -137,6 +161,8 @@ public class RegisterPanel extends Application {
     		
     		Stage stage = (Stage) btBack.getScene().getWindow();
     		
+    		stage.setScene(StartingPanel.scene1);
+    	
     	});
     	
     	
@@ -178,6 +204,7 @@ public class RegisterPanel extends Application {
     	
     	window.setScene(scene1);
     	window.show();
+  
 	
     }
 	

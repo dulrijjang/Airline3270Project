@@ -2,6 +2,7 @@ package edu.gsu.GUI;
 
 import java.util.Random;
 
+import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Customer;
 import edu.gsu.db.DBQuery;
 import javafx.application.Application;
@@ -192,7 +193,7 @@ public class RegisterPanel extends Application {
 
         try {
         	
-            DBQuery.register(c1);
+           BizLogicProcess.process1(c1);;
             
         } 
         

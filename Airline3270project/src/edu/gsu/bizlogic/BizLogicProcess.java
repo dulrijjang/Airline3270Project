@@ -7,7 +7,7 @@ import edu.gsu.common.Customer;
 
 public class BizLogicProcess {
 
-    public static void process(Customer c1) throws Exception {
+    public static void process1(Customer c1) throws Exception {
 
         switch (c1.getAction()) {
 
@@ -37,7 +37,7 @@ public class BizLogicProcess {
 
     }
 
-    public static void process(Flight f1) throws Exception {
+    public static void process2(Flight f1) throws Exception {
 
         DBQuery.search(f1);
 

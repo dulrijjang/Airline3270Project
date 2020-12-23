@@ -4,6 +4,7 @@ import static edu.gsu.bizlogic.BizLogicProcess.process;
 
 import java.util.Random;
 
+import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Customer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -193,7 +194,7 @@ public class RegisterPanel extends Application {
 
         try {
         	
-            process(c1);
+            BizLogicProcess.process1(c1);
             
         } 
         

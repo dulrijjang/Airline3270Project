@@ -118,12 +118,7 @@ public class RegisterPanel extends Application {
     	saText = new TextField();
     	
     	btCreate = new Button("Create");
-    	btCreate.setOnAction(e-> {
-    	
-    		RegisterPanel rp = new RegisterPanel();
-    		rp.regiInput();	
-    				
-    	});
+    	btCreate.setOnAction(e-> regiInput());
     	
     	btBack = new Button("Back");
     	btBack.setOnAction(e-> {

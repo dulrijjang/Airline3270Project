@@ -55,7 +55,7 @@ public class LoginPanel extends Application {
     		
     		try {
     			
-    			BizLogicProcess.process(c1);
+    			BizLogicProcess.process1(c1);
     			
     		}
     		

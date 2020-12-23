@@ -196,7 +196,7 @@ public class BookingPanel extends JPanel {
                     f1.setAction("flightDep");
 
                     try {
-                        BizLogicProcess.process(f1);
+                        BizLogicProcess.process2(f1);
                     } catch (Exception e) {
                         System.out.print(e);
                     }
@@ -209,7 +209,7 @@ public class BookingPanel extends JPanel {
                     f1.setAction("flightArrival");
 
                     try {
-                        BizLogicProcess.process(f1);
+                        BizLogicProcess.process2(f1);
                     } catch (Exception e) {
                         System.out.print(e);
                     }
@@ -274,7 +274,7 @@ public class BookingPanel extends JPanel {
                     f1.setAction("flightMo");
 
                     try {
-                        BizLogicProcess.process(f1);
+                        BizLogicProcess.process2(f1);
                     } catch (Exception e) {
                         System.out.print(e);
                     }
@@ -287,7 +287,7 @@ public class BookingPanel extends JPanel {
                     f1.setAction("flightDay");
 
                     try {
-                        BizLogicProcess.process(f1);
+                        BizLogicProcess.process2(f1);
                     } catch (Exception e) {
                         System.out.print(e);
                     }
@@ -300,7 +300,7 @@ public class BookingPanel extends JPanel {
                     f1.setAction("flightTime");
 
                     try {
-                        BizLogicProcess.process(f1);
+                        BizLogicProcess.process2(f1);
                     } catch (Exception e) {
                         System.out.print(e);
                     }
@@ -313,7 +313,7 @@ public class BookingPanel extends JPanel {
                     f1.setAction("flightAir");
 
                     try {
-                        BizLogicProcess.process(f1);
+                        BizLogicProcess.process2(f1);
                     } catch (Exception e) {
                         System.out.print(e);
                     }

@@ -74,7 +74,7 @@ public class ForgotPanel extends JPanel {
             c1.setAction("forgot");
 
             try {
-                BizLogicProcess.process(c1);
+                BizLogicProcess.process1(c1);
             } catch (LoginException e) {
                 System.out.print(e);
             } catch (Exception e) {

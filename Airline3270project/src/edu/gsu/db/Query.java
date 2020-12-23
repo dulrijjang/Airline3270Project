@@ -8,7 +8,7 @@ public class Query {
                     + "WHERE id = ? AND psw = ?";
 
     public static final String REGISTER =
-            "INSERT INTO registration "
+            "INSERT INTO registration"
                     + "(royaltynumber, firstname, lastname, id, psw, " +
                     "email, address, zip, state, ssn, securityq, securitya) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

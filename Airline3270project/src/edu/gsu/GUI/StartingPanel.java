@@ -1,4 +1,5 @@
 package edu.gsu.GUI;
+import edu.gsu.GUI.LoginPanel;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -62,8 +63,8 @@ public class StartingPanel extends Application {
 		btLogin.setOnAction(e-> {
 			
 			LoginPanel lp = new LoginPanel();
-			
 			lp.btLoginAction(e);
+			
 			
 		});
 		

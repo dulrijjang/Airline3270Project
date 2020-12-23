@@ -5,6 +5,7 @@ import edu.gsu.common.Customer;
 import edu.gsu.exceptions.LoginException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -41,8 +42,8 @@ public class LoginPanel extends Application {
     }
     
 	public void btLoginAction (ActionEvent event) {
-    	
-    	if(event.getSource() == sp.btLogin) {
+		
+		 if(event.getSource() == sp.btLogin) {
     		
     		String loginID = sp.tfname.getText();
     		String psw = sp.pfpsw.getText();
@@ -70,10 +71,11 @@ public class LoginPanel extends Application {
     			System.out.println(e);
     			
     		}
+		 }
     		
-    	}
+	}
     	
-    }
+
 	
 //  class ButtonListener implements ActionListener {
 

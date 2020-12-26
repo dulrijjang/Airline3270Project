@@ -39,7 +39,7 @@ public class BizLogicProcess {
 
     public static void process2(Flight f1) throws Exception {
 
-        DBQuery.search(f1);
+        //DBQuery.search(f1);
 
     }
 

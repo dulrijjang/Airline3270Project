@@ -3,6 +3,7 @@ package edu.gsu.GUI;
 import java.util.Random;
 
 import edu.gsu.bizlogic.BizLogicProcess;
+import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
 import edu.gsu.db.DBQuery;
 import javafx.application.Application;
@@ -11,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -48,7 +48,7 @@ public class RegisterPanel extends Application {
 	 Label securityA;
 	 
 	 TextField usnText; 
- 	 PasswordField pswText;
+ 	 TextField pswText;
  	 TextField fnText;
  	 TextField lnText;
  	 TextField emText; 
@@ -105,20 +105,21 @@ public class RegisterPanel extends Application {
     	securityA.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 12));
     	securityA.setStyle("-fx-text-fill: Black;");
     	
-    	usnText = new TextField();
-    	pswText = new PasswordField();
-    	fnText = new TextField();
-    	lnText = new TextField();
-    	emText = new TextField();
-    	addText = new TextField();
-    	zipText = new TextField();
-    	stateText = new TextField();
-    	ssnText = new TextField();
-    	sqText = new TextField();
-    	saText = new TextField();
+    	usnText = new TextField("LoginID");
+    	pswText = new TextField("Password");
+    	fnText = new TextField("FirstName");
+    	lnText = new TextField("LastName");
+    	emText = new TextField("Email");
+    	addText = new TextField("Address");
+    	zipText = new TextField("ZipCode");
+    	stateText = new TextField("State");
+    	ssnText = new TextField("SocialSecurity");
+    	sqText = new TextField("SecurityQuestion");
+    	saText = new TextField("SecurityAnswer");
     	
     	btCreate = new Button("Create");
-    	btCreate.setOnAction(e-> regiInput());
+    	btCreate.setOnAction(e-> regiInput(usnText.getText(),pswText.getText(),fnText.getText(),lnText.getText(),emText.getText(),addText.getText(),zipText.getText(),
+    			stateText.getText(), ssnText.getText(), sqText.getText(), saText.getText()));
     	
     	btBack = new Button("Back");
     	btBack.setOnAction(e-> {
@@ -172,24 +173,25 @@ public class RegisterPanel extends Application {
 	
     }
     
-    public void regiInput () {
+    public void regiInput (String LoginID, String Password, String FirstName, String LastName, String Email, String Address, String ZipCode, 
+    		String State, String SocialSecurity, String SecurityQuestion, String SecurityAnswer) {
 
         Random rand = new Random();
         String royaltyNumber = rand.nextInt(10000) + "";
 
         c1.setRoyaltyNumber(royaltyNumber); 
-        c1.setFirstName(fnText.getText()); 
-        c1.setLastName(lnText.getText()); 
-        c1.setLoginID(usnText.getText()); 
-        c1.setPassword(pswText.getText()); 
-        c1.setEmail(emText.getText()); 
-        c1.setAddress(addText.getText()); 
-        c1.setZip(zipText.getText()); 
-        c1.setState(stateText.getText()); 
-        c1.setSSN(ssnText.getText()); 
-        c1.setSecurityQ(sqText.getText()); 
-        c1.setSecurityA(saText.getText());
-        c1.setAction("register");
+        c1.setFirstName(FirstName); 
+        c1.setLastName(LastName); 
+        c1.setLoginID(LoginID); 
+        c1.setPassword(Password); 
+        c1.setEmail(Email); 
+        c1.setAddress(Address); 
+        c1.setZip(ZipCode); 
+        c1.setState(State); 
+        c1.setSSN(SocialSecurity); 
+        c1.setSecurityQ(SecurityQuestion); 
+        c1.setSecurityA(SecurityAnswer);
+        c1.setAction(Action.REGISTER);
 
         try {
         	

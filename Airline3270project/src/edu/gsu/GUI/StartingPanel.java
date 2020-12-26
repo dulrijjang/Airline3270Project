@@ -63,7 +63,13 @@ public class StartingPanel extends Application {
 		btLogin.setOnAction(e-> {
 			
 			LoginPanel lp = new LoginPanel();
-			lp.btLoginAction(e);
+			try {
+				lp.btLoginAction(tfname.getText(),pfpsw.getText());
+			} 
+			catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			
 		});

@@ -1,8 +1,12 @@
 package edu.gsu.GUI;
 
 import edu.gsu.bizlogic.BizLogicProcess;
+import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
+import edu.gsu.db.DBQuery;
 import edu.gsu.exceptions.LoginException;
+import edu.gsu.GUI.AccountPanel;
+import edu.gsu.GUI.PopUP;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -36,44 +40,54 @@ public class LoginPanel extends Application {
 	
     private Customer c1 = new Customer();
 
-    public LoginPanel() {
-    	
     
-    }
-    
-	public void btLoginAction (ActionEvent event) {
+    public void btLoginAction (String loginID, String psw) throws Exception {
 		
-		 if(event.getSource() == sp.btLogin) {
+    
+    	System.out.println(loginID + "," + psw);
     		
-    		String loginID = sp.tfname.getText();
-    		String psw = sp.pfpsw.getText();
+    	c1.setLoginID(loginID);
+    	c1.setPassword(psw);
+    	c1.setAction(Action.LOGIN);
+    	
+    	
+    	
+    	boolean successLogin = PopUP.confirmation(c1);
+    	
+    	if (successLogin) {
     		
-    		System.out.println(loginID + "," + psw);
+    		DBQuery.login(c1);
+    		System.out.println("Welcome back!");
+    		c1.setAction(Action.GET_FLIGHTS);
+    		successLogin = PopUP.confirmation(c1);
     		
-    		c1.setLoginID(loginID);
-    		c1.setPassword(psw);
-    		c1.setAction("login");
-    		
-    		try {
+    		if (successLogin) {
     			
-    			BizLogicProcess.process1(c1);
+    			Stage stage = (Stage) sp.btLogin.getScene().getWindow();
+    			stage.close();
+    			
+    			AccountPanel ap = new AccountPanel(c1);
+    			
+    			try {
+    				
+    				ap.start(new Stage());
+    				
+    			}
+    			
+    			catch (Exception e) {
+    				
+    				e.printStackTrace();
+    				
+    			}
+    			
     			
     		}
     		
-    		catch (LoginException e) {
-    			
-    			System.out.println(e);
-    			
-    		}
+    	}
     		
-    		catch (Exception e) {
-    			
-    			System.out.println(e);
-    			
-    		}
-		 }
     		
-	}
+    		
+}
     	
 
 	

@@ -1,6 +1,22 @@
 package edu.gsu.db;
 
 public class Query {
+	
+	public static final String CREATE = 
+			"CREATE TABLE regi (" + 
+			"royaltynumber varchar(255) Not Null," + 
+			"firstname varchar(255) Not Null," + 
+			"lastname varchar(255) Not Null," + 
+			"id varchar(255) Not Null," + 
+			"psw varchar(255) Not Null," + 
+			"email varchar(255) Not Null," + 
+			"address varchar(255) Not Null," + 
+			"zip varchar(255) Not Null," + 
+			"state varchar(255) Not Null," + 
+			"ssn varchar(255) Not Null," + 
+			"securityq varchar(255) Not Null," + 
+			"securitya varchar(255) Not Null)";
+		
 
     public static final String LOGIN =
             "SELECT count(*) as num  "

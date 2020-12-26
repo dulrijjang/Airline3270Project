@@ -33,6 +33,7 @@ public class DBQuery{
             System.out.println("Connected");
 
             // Create a statement
+            PreparedStatement st  = conn.prepareStatement(Query.CREATE);
             PreparedStatement ptmt = conn.prepareStatement(Query.LOGIN);
 
             ptmt.setString(1, c1.getLoginID());
@@ -66,7 +67,7 @@ public class DBQuery{
         }
     }
 
-    public static void getFlights(Customer customer) throws Exception {
+    public static void getFlights(Customer c1) throws Exception {
 
         // can I run a query on reservation table that select all teh rows with customerID comes from co
 
@@ -79,9 +80,9 @@ public class DBQuery{
         Flight f3 = new Flight();
         f3.setAirline("c");
 
-        customer.getFlights().add(f1);
-        customer.getFlights().add(f2);
-        customer.getFlights().add(f3);
+        c1.getFlights().add(f1);
+        c1.getFlights().add(f2);
+        c1.getFlights().add(f3);
 
     }
 

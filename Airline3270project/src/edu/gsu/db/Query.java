@@ -20,18 +20,18 @@ public class Query {
 
     public static final String LOGIN =
             "SELECT count(*) as num  "
-                    + "FROM registration "
+                    + "FROM regi "
                     + "WHERE id = ? AND psw = ?";
 
     public static final String REGISTER =
-            "INSERT INTO registration"
+            "INSERT INTO regi"
                     + "(royaltynumber, firstname, lastname, id, psw, " +
                     "email, address, zip, state, ssn, securityq, securitya) VALUES"
                     + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public static final String FORGOT =
             "SELECT psw " +
-                    "FROM registration " +
+                    "FROM regi " +
                     "WHERE id = ? AND securityq = ? AND securitya = ?";
 
     public static final String FLIGHT_DEPARTURE =

@@ -36,8 +36,8 @@ public class DBQuery{
            // PreparedStatement st  = conn.prepareStatement(Query.CREATE);
             PreparedStatement ptmt = conn.prepareStatement(Query.LOGIN);
 
-            ptmt.setString(1, c1.getLoginID());
-            ptmt.setString(2, c1.getPassword());
+           // ptmt.setString(1, c1.getLoginID());
+           // ptmt.setString(2, c1.getPassword());
 
             // Execute a statement
             ResultSet rs1 = ptmt.executeQuery();

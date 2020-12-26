@@ -97,6 +97,7 @@ public class StartingPanel extends Application {
 		
 		primaryStage.setScene(scene1);
 		primaryStage.show();
+		
 	}
 	
 	public void login(String loginID, String psw) {

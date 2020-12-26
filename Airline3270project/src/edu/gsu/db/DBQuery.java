@@ -33,7 +33,7 @@ public class DBQuery{
             System.out.println("Connected");
 
             // Create a statement
-            PreparedStatement st  = conn.prepareStatement(Query.CREATE);
+           // PreparedStatement st  = conn.prepareStatement(Query.CREATE);
             PreparedStatement ptmt = conn.prepareStatement(Query.LOGIN);
 
             ptmt.setString(1, c1.getLoginID());

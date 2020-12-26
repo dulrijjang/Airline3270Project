@@ -1,14 +1,18 @@
 package edu.gsu.db;
 
-import java.awt.*;
 import java.sql.*;
 
 import edu.gsu.common.*;
 import edu.gsu.common.Action;
 import edu.gsu.exceptions.*;
+import edu.gsu.exceptions.LoginException;
 import edu.gsu.GUI.*;
 
-import javax.swing.*;
+
+
+import edu.gsu.common.Customer;
+import edu.gsu.common.Flight;
+import edu.gsu.db.Query;
 
 
 public class DBQuery{
@@ -17,10 +21,6 @@ public class DBQuery{
     private static String URL = "jdbc:mysql://localhost:3306/?user=root?iseTimezone=true&serverTimezone=UTC";
     private static String USN = "root";
     private static String PSW = "Xkwhdkf1@";
-
-    private Connection con;
-   // private static PreparedStatement ptmt;
-    private ResultSet rs;
 
     public static void login(Customer c1) throws Exception {
 
@@ -47,7 +47,7 @@ public class DBQuery{
             while (rs1.next()) {
                 System.out.println("Number of Users:" + rs1.getInt(1));
                 count = rs1.getInt(1);
-
+              
             }
 
             if (count == 0)
@@ -65,9 +65,6 @@ public class DBQuery{
             conn.close();
         }
     }
-
-
-
 
     public static void getFlights(Customer customer) throws Exception {
 

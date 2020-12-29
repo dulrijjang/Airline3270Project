@@ -25,9 +25,15 @@ public class StartingPanel extends Application {
 
 	Stage window;
 
-	Image image = new Image("flight.jpg");
-	BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+	Image image = new Image("jet_plane.jpg", 250, 400, false, false);
+	BackgroundImage bgi = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+			BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	Background bg = new Background(bgi);
+
+	Image logo = new Image("BoBoLogo.jpg", 275, 70, false, false);
+	BackgroundImage bgi2 = new BackgroundImage(logo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+			BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+	Background bg2 = new Background(bgi2);
 
 	private Customer c1 = new Customer();
 
@@ -199,23 +205,45 @@ public class StartingPanel extends Application {
 		});
 
 		Pane loginLayout = new Pane();
-		username.setLayoutX(5);
-		username.setLayoutY(5);
-		password.setLayoutX(5);
-		password.setLayoutY(30);
-		usnText.setLayoutX(150);
-		usnText.setLayoutY(5);
-		pswText.setLayoutX(150);
-		pswText.setLayoutY(30);
-		btLogin.setLayoutX(5);
-		btLogin.setLayoutY(120);
-		btFgot.setLayoutX(5);
-		btFgot.setLayoutY(150);
-		btRegi.setLayoutX(5);
-		btRegi.setLayoutY(180);
-		loginLayout.setBackground(bg);
+		username.setLayoutX(40);
+		username.setLayoutY(150);
+		password.setLayoutX(40);
+		password.setLayoutY(190);
+		usnText.setLayoutX(115);
+		usnText.setLayoutY(150);
+		pswText.setLayoutX(115);
+		pswText.setLayoutY(190);
+		btLogin.setLayoutX(175);
+		btLogin.setLayoutY(230);
+		btLogin.setPrefSize(150,30);
+		btFgot.setLayoutX(175);
+		btFgot.setLayoutY(270);
+		btFgot.setPrefSize(70,30);
+		btRegi.setLayoutX(255);
+		btRegi.setLayoutY(270);
+		btRegi.setPrefSize(70,30);
+
+		loginLayout.setPrefSize(450, 400);
+		loginLayout.setStyle("-fx-background-color: white;");
 		loginLayout.getChildren().addAll(username, password, usnText, pswText, btLogin, btFgot, btRegi);
-		loginScene = new Scene(loginLayout, 800, 600);
+
+		Pane border = new Pane();
+		border.setPrefSize(200,400);
+		border.setBackground(bg);
+
+		Pane boboLogo = new Pane();
+		boboLogo.setPrefSize(400,80);
+		boboLogo.setBackground(bg2);
+
+		AnchorPane log = new AnchorPane(border,loginLayout, boboLogo);
+		log.setTopAnchor(border, 0.0);
+		log.setLeftAnchor(border, 0.0);
+		log.setTopAnchor(loginLayout, 0.0);
+		log.setRightAnchor(loginLayout, 0.0);
+		log.setTopAnchor(boboLogo, 55.0);
+		log.setLeftAnchor(boboLogo, 225.0);
+		loginScene = new Scene(log, 650, 400);
+		window.setResizable(false);
 
 		Pane regisLayout = new Pane();
 		username1.setLayoutX(5);
@@ -343,7 +371,7 @@ public class StartingPanel extends Application {
 
 		try {
 
-			BizLogicProcess.process1(c1);
+			BizLogicProcess.process1(c1);;
 
 		}
 

@@ -16,11 +16,15 @@ import edu.gsu.db.Query;
 
 
 public class DBQuery{
-	
+
     private static String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static String URL = "jdbc:mysql://localhost:3306/?user=root?iseTimezone=true&serverTimezone=UTC";
+    private static String URL = "jdbc:mysql://127.0.0.1:3306/bobo?user=root?iseTimezone=true&serverTimezone=UTC";
+    //need to alter url and insert name of schema/database before ?user
+    // "jdbc:mysql://localhost:3306/?user=root?iseTimezone=true&serverTimezone=UTC";
     private static String USN = "root";
-    private static String PSW = "Xkwhdkf1@";
+    //"root";
+    private static String PSW = "Snowy26!";
+    //"Xkwhdkf1@";
 
     public static void login(Customer c1) throws Exception {
 

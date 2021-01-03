@@ -1,18 +1,10 @@
 package edu.gsu.db;
 
-import java.sql.*;
-
-import edu.gsu.common.*;
-import edu.gsu.common.Action;
-import edu.gsu.exceptions.*;
-import edu.gsu.exceptions.LoginException;
-import edu.gsu.GUI.*;
-
-
-
 import edu.gsu.common.Customer;
 import edu.gsu.common.Flight;
-import edu.gsu.db.Query;
+import edu.gsu.exceptions.LoginException;
+
+import java.sql.*;
 
 
 public class DBQuery{
@@ -33,11 +25,11 @@ public class DBQuery{
         try {
 
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL,USN,PSW);
+            conn = DriverManager.getConnection(URL, USN, PSW);
             System.out.println("Connected");
 
             // Create a statement
-           // PreparedStatement st  = conn.prepareStatement(Query.CREATE);
+            // PreparedStatement st  = conn.prepareStatement(Query.CREATE);
             PreparedStatement ptmt = conn.prepareStatement(Query.LOGIN);
 
             ptmt.setString(1, c1.getLoginID());
@@ -52,24 +44,23 @@ public class DBQuery{
             while (rs1.next()) {
                 System.out.println("Number of Users:" + rs1.getInt(1));
                 count = rs1.getInt(1);
-              
             }
 
             if (count == 0)
                 throw new LoginException("Incorrect LoginID or Password!");
 
 
-        } catch (SQLException e) {
 
+        }catch(SQLException e){
             System.out.println(e);
             throw e;
-
         }
-        finally {
-
+        finally{
             conn.close();
         }
+
     }
+
 
     public static void getFlights(Customer c1) throws Exception {
 
@@ -176,9 +167,9 @@ public class DBQuery{
         }
     }
 
-  //  public static void search(Flight f1) throws Exception {
+    //  public static void search(Flight f1) throws Exception {
 
-   //     Connection conn = null;
+    //     Connection conn = null;
 
     //    try {
 
@@ -186,109 +177,109 @@ public class DBQuery{
     //        conn = DriverManager.getConnection(URL,USN,PSW);
     //        System.out.println("Connected");
 
-            // Create a statement
-   //         switch (f1.getAction()){
+    // Create a statement
+    //         switch (f1.getAction()){
 
     //            case edu.gsu.common.Action.FLIGHT_DEPARTURE:
     //                PreparedStatement ptmt = conn.prepareStatement(Query.FLIGHT_DEPARTURE);
     //                ptmt.setString(1, f1.getDeparture());
     //                break;
 
-     //           case Action.FLIGHT_ARRIVAL:
-     //               ptmt = conn.prepareStatement(Query.FLIGHT_ARRIVAL);
+    //           case Action.FLIGHT_ARRIVAL:
+    //               ptmt = conn.prepareStatement(Query.FLIGHT_ARRIVAL);
     //               ptmt.setString(1, f1.getArrival());
-     //               break;
+    //               break;
 
-     //           case Action.FLIGHT_MONTHS:
-      //              ptmt = conn.prepareStatement(Query.FLIGHT_MONTHS);
-      //              ptmt.setString(1, f1.getMonth());
-       //             break;
+    //           case Action.FLIGHT_MONTHS:
+    //              ptmt = conn.prepareStatement(Query.FLIGHT_MONTHS);
+    //              ptmt.setString(1, f1.getMonth());
+    //             break;
 
-     //           case Action.FLIGHT_DATES:
-     //               ptmt = conn.prepareStatement(Query.FLIGHT_DATES);
-      //              ptmt.setString(1, f1.getDay());
+    //           case Action.FLIGHT_DATES:
+    //               ptmt = conn.prepareStatement(Query.FLIGHT_DATES);
+    //              ptmt.setString(1, f1.getDay());
     //                break;
 
-     //           case Action.FLIGHT_TIMES:
-      //              ptmt = conn.prepareStatement(Query.FLIGHT_TIMES);
-      //              ptmt.setString(1, f1.getTime());
-      //              break;
+    //           case Action.FLIGHT_TIMES:
+    //              ptmt = conn.prepareStatement(Query.FLIGHT_TIMES);
+    //              ptmt.setString(1, f1.getTime());
+    //              break;
 
-      //         case Action.FLIGHT_AIRLINE:
-       //             ptmt = conn.prepareStatement(Query.FLIGHT_AIRLINE);
-       //             ptmt.setString(1, f1.getAirline());
-      //              break;
-       //     }
+    //         case Action.FLIGHT_AIRLINE:
+    //             ptmt = conn.prepareStatement(Query.FLIGHT_AIRLINE);
+    //             ptmt.setString(1, f1.getAirline());
+    //              break;
+    //     }
 
-            // Execute a statement
-       //     ResultSet rs1 = ptmt.executeQuery();
+    // Execute a statement
+    //     ResultSet rs1 = ptmt.executeQuery();
 
-       //     String departure;
-       //     String arrival;
-       //     String month;
-      //      String day;
-       //     String time;
-      //      String airline;
-      //      String flightID;
+    //     String departure;
+    //     String arrival;
+    //     String month;
+    //      String day;
+    //     String time;
+    //      String airline;
+    //      String flightID;
 
-      //      JFrame frame = new JFrame("BoBo Tours");
-      //      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-      //      JPanel panel = new JPanel();
-      //      panel.setPreferredSize(new Dimension(300, 200));
-      //      panel.setBackground(Color.WHITE);
-      //      panel.setLayout(null);
-      //      frame.getContentPane().add(panel);
-      //      frame.pack();
-      //      frame.setVisible(true);
+    //      JFrame frame = new JFrame("BoBo Tours");
+    //      frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    //      JPanel panel = new JPanel();
+    //      panel.setPreferredSize(new Dimension(300, 200));
+    //      panel.setBackground(Color.WHITE);
+    //      panel.setLayout(null);
+    //      frame.getContentPane().add(panel);
+    //      frame.pack();
+    //      frame.setVisible(true);
 
-      //      JLabel topBar = new JLabel("Dep     Arr     Mo   Day  Hr   Airline             ID");
-      //      topBar.setBounds(20,20,260,25);
-       //     panel.add(topBar);
+    //      JLabel topBar = new JLabel("Dep     Arr     Mo   Day  Hr   Airline             ID");
+    //      topBar.setBounds(20,20,260,25);
+    //     panel.add(topBar);
 
-       //     JLabel info;
-       ///     int y = 60;
-       //     // Iterate through the result and print the student names
-       //     while (rs1.next()) {
+    //     JLabel info;
+    ///     int y = 60;
+    //     // Iterate through the result and print the student names
+    //     while (rs1.next()) {
 
-       //         departure = rs1.getString(1);
-       //         info = new JLabel(departure);
-        //        info.setBounds(20, y, 30, 20);
-        //        panel.add(info);
+    //         departure = rs1.getString(1);
+    //         info = new JLabel(departure);
+    //        info.setBounds(20, y, 30, 20);
+    //        panel.add(info);
 
-        //        arrival = rs1.getString(2);
-        //        info = new JLabel(arrival);
-        //        info.setBounds(60, y, 30, 20);
-        //        panel.add(info);
+    //        arrival = rs1.getString(2);
+    //        info = new JLabel(arrival);
+    //        info.setBounds(60, y, 30, 20);
+    //        panel.add(info);
 
 
-       //         month = rs1.getInt(3) + "";
-       //         info = new JLabel(month);
-       //         info.setBounds(100, y, 15, 20);
-       //         panel.add(info);
+    //         month = rs1.getInt(3) + "";
+    //         info = new JLabel(month);
+    //         info.setBounds(100, y, 15, 20);
+    //         panel.add(info);
 
-       //         day = rs1.getInt(4) + "";
-       //         info = new JLabel(day);
-       //         info.setBounds(125, y, 15, 20);
-       //         panel.add(info);
+    //         day = rs1.getInt(4) + "";
+    //         info = new JLabel(day);
+    //         info.setBounds(125, y, 15, 20);
+    //         panel.add(info);
 
-      //          time = rs1.getInt(5) + "";
-      //          info = new JLabel(time);
-      //          info.setBounds(150, y, 15, 20);
-      //          panel.add(info);
+    //          time = rs1.getInt(5) + "";
+    //          info = new JLabel(time);
+    //          info.setBounds(150, y, 15, 20);
+    //          panel.add(info);
 
-      //          airline = rs1.getString(6);
-     //           info = new JLabel(airline);
-     //          info.setBounds(175, y, 100, 20);
-     //          panel.add(info);
+    //          airline = rs1.getString(6);
+    //           info = new JLabel(airline);
+    //          info.setBounds(175, y, 100, 20);
+    //          panel.add(info);
 
-      //          flightID = rs1.getString(7);
-      //          info = new JLabel(flightID);
-      //          info.setBounds(260, y, 30, 20);
-      //          panel.add(info);
+    //          flightID = rs1.getString(7);
+    //          info = new JLabel(flightID);
+    //          info.setBounds(260, y, 30, 20);
+    //          panel.add(info);
 
-     //           y = y + 20;
+    //           y = y + 20;
 
-      //      }
+    //      }
 
 
     //    } catch (SQLException e) {
@@ -298,8 +289,8 @@ public class DBQuery{
     //    }
     //    finally {
 
-     //       conn.close();
+    //       conn.close();
     //    }
-  //   }
+    //   }
 
 }

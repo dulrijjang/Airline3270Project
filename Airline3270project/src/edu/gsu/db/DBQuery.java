@@ -7,7 +7,7 @@ import edu.gsu.exceptions.LoginException;
 import java.sql.*;
 
 
-public class DBQuery{
+public class DBQuery {
 
     private static String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static String URL = "jdbc:mysql://127.0.0.1:3306/bobo?user=root?iseTimezone=true&serverTimezone=UTC";
@@ -50,12 +50,10 @@ public class DBQuery{
                 throw new LoginException("Incorrect LoginID or Password!");
 
 
-
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
             throw e;
-        }
-        finally{
+        } finally {
             conn.close();
         }
 
@@ -91,7 +89,7 @@ public class DBQuery{
             Class.forName(DRIVER);
             System.out.println("driver found");
 
-            conn = DriverManager.getConnection(URL,USN,PSW);
+            conn = DriverManager.getConnection(URL, USN, PSW);
             System.out.println("Connected");
 
 
@@ -117,11 +115,9 @@ public class DBQuery{
             System.out.print(r1);
 
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.print(e);
-        }
-        finally {
+        } finally {
             conn.close();
         }
 
@@ -134,7 +130,7 @@ public class DBQuery{
         try {
 
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL,USN,PSW);
+            conn = DriverManager.getConnection(URL, USN, PSW);
             System.out.println("Connected");
 
             // Create a statement
@@ -160,12 +156,84 @@ public class DBQuery{
 
             System.out.println(e);
             throw e;
-        }
-        finally {
+        } finally {
 
             conn.close();
         }
     }
+
+    public static String question(Customer c1) throws Exception {
+
+        Connection conn = null;
+        String securityq = null;
+
+        try {
+
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL, USN, PSW);
+            System.out.println("Connected");
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.QUESTION);
+
+            ptmt.setString(1, c1.getLoginID());
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                securityq = rs1.getNString(1);
+                c1.setSecurityQ(securityq);
+            }
+
+            return securityq;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
+
+    public static String password(Customer c1) throws Exception {
+
+        Connection conn = null;
+        String password1 = null;
+
+        try {
+
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL, USN, PSW);
+            System.out.println("Connected");
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.FORGOT);
+
+            ptmt.setString(1, c1.getLoginID());
+            ptmt.setString(2, c1.getSecurityQ());
+            ptmt.setString(3, c1.getSecurityA());
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                password1 = rs1.getNString(1);
+                c1.setSecurityQ(password1);
+            }
+
+            return password1;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
+
 
     //  public static void search(Flight f1) throws Exception {
 

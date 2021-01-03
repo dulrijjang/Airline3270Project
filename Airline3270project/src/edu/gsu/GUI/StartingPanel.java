@@ -4,8 +4,6 @@ import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,7 +19,7 @@ import java.util.Random;
 
 public class StartingPanel extends Application {
 
-	Scene loginScene, regScene, acctScene;
+	Scene loginScene, regScene, forgotScene, acctScene;
 
 	Stage window;
 
@@ -31,11 +29,17 @@ public class StartingPanel extends Application {
 	Background bg = new Background(bgi);
 
 	Image logo = new Image("BoBoLogo.jpg", 275, 70, false, false);
-	BackgroundImage bgi2 = new BackgroundImage(logo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+	BackgroundImage boboImage = new BackgroundImage(logo, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+			BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+	Background bobo = new Background(boboImage);
+
+	Image image2 = new Image("flight2.jpg", 775, 350, false, false);
+	BackgroundImage bgi2 = new BackgroundImage(image2, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 			BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	Background bg2 = new Background(bgi2);
 
 	private Customer c1 = new Customer();
+	private Customer c2 = new Customer();
 
 	//login
 	Button btLogin;
@@ -75,6 +79,20 @@ public class StartingPanel extends Application {
 	TextField ssnText;
 	TextField sqText;
 	TextField saText;
+
+	//forgot
+	Button forgot;
+	Button btBack2;
+
+	Label id;
+	Label c1Id;
+	Label q;
+	Label c1Q;
+	Label a;
+	Label retrievedPsw;
+	Label yourPsw;
+
+	TextField answer;
 
 	public static void main(String[] args) { launch(args); }
 
@@ -191,6 +209,17 @@ public class StartingPanel extends Application {
 		});
 
 		btFgot = new Button("Forgot");
+		btFgot.setOnAction(e-> {
+			c2.setLoginID(usnText.getText());
+			c2.setSecurityQ(retrieveQ(usnText.getText()));
+
+			c1Id.setText(c2.getLoginID());
+			c1Q.setText(c2.getSecurityQ());
+
+			window.setTitle("BoBo Password Retrieval");
+			window.setScene(forgotScene);
+
+		});
 
 		btCreate = new Button("Create");
 		btCreate.setOnAction(e-> regiInput(usnText.getText(),pswText.getText(),fnText.getText(),
@@ -233,7 +262,7 @@ public class StartingPanel extends Application {
 
 		Pane boboLogo = new Pane();
 		boboLogo.setPrefSize(400,80);
-		boboLogo.setBackground(bg2);
+		boboLogo.setBackground(bobo);
 
 		AnchorPane log = new AnchorPane(border,loginLayout, boboLogo);
 		log.setTopAnchor(border, 0.0);
@@ -302,8 +331,73 @@ public class StartingPanel extends Application {
 		window.setScene(loginScene);
 		window.show();
 
+		//forgot panel
 
+		id = new Label("Login ID: ");
+		id.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		id.setStyle("-fx-text-fill: Black;");
+		id.setLayoutX(15);
+		id.setLayoutY(15);
 
+		c1Id = new Label();
+		c1Id.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		c1Id.setStyle("-fx-text-fill: Blue;");
+		c1Id.setLayoutX(150);
+		c1Id.setLayoutY(15);
+
+		q = new Label("Security Question: ");
+		q.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		q.setStyle("-fx-text-fill: Black;");
+		q.setLayoutX(15);
+		q.setLayoutY(65);
+
+		c1Q = new Label();
+		c1Q.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		c1Q.setStyle("-fx-text-fill: Blue;");
+		c1Q.setLayoutX(150);
+		c1Q.setLayoutY(65);
+
+		a = new Label("Answer: ");
+		a.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		a.setStyle("-fx-text-fill: Black;");
+		a.setLayoutX(15);
+		a.setLayoutY(115);
+
+		answer = new TextField();
+		answer.setPromptText("Answer to your security question");
+		answer.setPrefSize(600,25);
+		answer.setLayoutX(150);
+		answer.setLayoutY(115);
+
+		yourPsw = new Label("Your password is: ");
+		yourPsw.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		yourPsw.setStyle("-fx-text-fill: Black;");
+		yourPsw.setLayoutX(15);
+		yourPsw.setLayoutY(200);
+
+		retrievedPsw = new Label();
+		retrievedPsw.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 30));
+		retrievedPsw.setStyle("-fx-text-fill: Red;");
+		retrievedPsw.setLayoutX(15);
+		retrievedPsw.setLayoutY(225);
+
+		forgot = new Button("Forgot Password");
+		forgot.setOnAction( e ->
+				retrievedPsw.setText(retrievePsw(c1Id.getText(), c1Q.getText(), answer.getText())));
+		forgot.setLayoutX(250);
+		forgot.setLayoutY(175);
+
+		btBack2 = new Button("Back");
+		btBack2.setOnAction(e-> {
+			window.setScene(loginScene);
+		});
+		btBack2.setLayoutX(375);
+		btBack2.setLayoutY(175);
+
+		Pane forgotLayout = new Pane();
+		forgotLayout.setBackground(bg2);
+		forgotLayout.getChildren().addAll(id, c1Id, q, c1Q, a, answer, forgot, yourPsw, retrievedPsw, btBack2);
+		forgotScene = new Scene(forgotLayout, 775, 300);
 
 	}
 
@@ -337,9 +431,7 @@ public class StartingPanel extends Application {
 
 				try {
 					ap.start(new Stage());
-				}
-
-				catch (Exception e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -381,6 +473,37 @@ public class StartingPanel extends Application {
 
 		}
 
+	}
+
+	public String retrieveQ(String loginID) {
+
+		Customer c1 = new Customer();
+
+		c1.setLoginID(loginID);
+		c1.setAction(Action.FIND_QUESTION);
+
+		System.out.println("Customer: " + loginID);
+		System.out.println("Password: " + PopUP.findQ(c1));
+
+		c1.setSecurityQ(PopUP.findQ(c1));
+
+		return c1.getSecurityQ();
+
+	}
+
+	public String retrievePsw(String loginID, String securityQ, String securityA) {
+
+		Customer c1 = new Customer();
+
+		c1.setLoginID(loginID);
+		c1.setSecurityQ(securityQ);
+		c1.setSecurityA(securityA);
+
+		c1.setAction(Action.FIND_PASSWORD);
+
+		c1.setPassword(PopUP.findQ(c1));
+
+		return c1.getPassword();
 	}
 
 

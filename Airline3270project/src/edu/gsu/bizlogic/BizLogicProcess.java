@@ -1,9 +1,9 @@
 package edu.gsu.bizlogic;
 
-import edu.gsu.common.Flight;
-import edu.gsu.db.DBQuery;
 import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
+import edu.gsu.common.Flight;
+import edu.gsu.db.DBQuery;
 
 public class BizLogicProcess {
 
@@ -32,9 +32,23 @@ public class BizLogicProcess {
                 break;
 
 
-
         }
 
+    }
+
+    public static String processQ(Customer c1) throws Exception {
+
+        String statement = null;
+
+        switch (c1.getAction()) {
+            case Action.FIND_QUESTION:
+                statement = DBQuery.question(c1);
+                break;
+            case Action.FIND_PASSWORD:
+                statement = DBQuery.password(c1);
+                break;
+        }
+        return statement;
     }
 
     public static void process2(Flight f1) throws Exception {

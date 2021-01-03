@@ -17,6 +17,10 @@ public class Query {
 					"securityq varchar(255) Not Null," +
 					"securitya varchar(255) Not Null)";
 
+	public static final String ROYALTY_NUM =
+			"SELECT royaltynumber "
+					+ "FROM regi "
+					+ "WHERE id = ?";
 
 	public static final String LOGIN =
 			"SELECT count(*) as num  "
@@ -38,6 +42,11 @@ public class Query {
 			"SELECT securityq " +
 					"FROM regi " +
 					"WHERE id = ?";
+
+	public static final String MY_FLIGHTS =
+			"SELECT flights.flightID, planeNum, airline, depart, arrive, depTime, arrTime, depDate" +
+					"FROM flights JOIN regi ON flights.flightID = regi.flightID" +
+					"WHERE royaltynumber IN ('?')";
 
 	public static final String FLIGHT_DEPARTURE =
 			"SELECT * " +

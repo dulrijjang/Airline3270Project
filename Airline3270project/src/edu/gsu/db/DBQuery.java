@@ -59,6 +59,40 @@ public class DBQuery {
 
     }
 
+    public static String royalty(Customer c1) throws Exception {
+
+        Connection conn = null;
+        String royaltyNum = null;
+
+        try {
+
+            Class.forName(DRIVER);
+            conn = DriverManager.getConnection(URL, USN, PSW);
+            System.out.println("Connected");
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.ROYALTY_NUM);
+
+            ptmt.setString(1, c1.getLoginID());
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                royaltyNum = rs1.getNString(1);
+                c1.setSecurityQ(royaltyNum);
+            }
+
+            return royaltyNum;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
 
     public static void getFlights(Customer c1) throws Exception {
 

@@ -47,6 +47,8 @@ public class BizLogicProcess {
             case Action.FIND_PASSWORD:
                 statement = DBQuery.password(c1);
                 break;
+            case Action.ROYALTY_NUM:
+                statement = DBQuery.royalty(c1);
         }
         return statement;
     }

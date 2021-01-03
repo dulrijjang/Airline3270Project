@@ -3,6 +3,7 @@ package edu.gsu.common;
 public class Action {
 
     public static final String LOGIN = "login";
+    public static final String ROYALTY_NUM = "royalty";
     public static final String GET_FLIGHTS = "getFlights";
     public static final String REGISTER = "register";
     public static final String FORGOT = "forgot";

@@ -3,6 +3,7 @@ package edu.gsu.GUI;
 import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
+import edu.gsu.db.DBQuery;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ import java.util.Random;
 
 public class StartingPanel extends Application {
 
-	Scene loginScene, regScene, forgotScene, acctScene;
+	Scene loginScene, regScene, forgotScene;
 
 	Stage window;
 
@@ -38,8 +39,7 @@ public class StartingPanel extends Application {
 			BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 	Background bg2 = new Background(bgi2);
 
-	private Customer c1 = new Customer();
-	private Customer c2 = new Customer();
+	Customer c1 = new Customer();
 
 	//login
 	Button btLogin;
@@ -212,11 +212,11 @@ public class StartingPanel extends Application {
 
 		btFgot = new Button("Forgot");
 		btFgot.setOnAction(e-> {
-			c2.setLoginID(usnText.getText());
-			c2.setSecurityQ(retrieveQ(usnText.getText()));
+			c1.setLoginID(usnText.getText());
+			c1.setSecurityQ(retrieveQ(usnText.getText()));
 
-			c1Id.setText(c2.getLoginID());
-			c1Q.setText(c2.getSecurityQ());
+			c1Id.setText(c1.getLoginID());
+			c1Q.setText(c1.getSecurityQ());
 
 			window.setTitle("BoBo Password Retrieval");
 			window.setScene(forgotScene);
@@ -429,6 +429,9 @@ public class StartingPanel extends Application {
 
 			System.out.println("Successful Login!");
 
+			c1.setAction(Action.ROYALTY_NUM);
+			c1.setRoyaltyNumber(PopUP.findQ(c1));
+
 			c1.setAction(Action.GET_FLIGHTS);
 
 			loginSuccess = PopUP.confirmation(c1);
@@ -517,5 +520,6 @@ public class StartingPanel extends Application {
 
 		return c1.getPassword();
 	}
+
 
 }

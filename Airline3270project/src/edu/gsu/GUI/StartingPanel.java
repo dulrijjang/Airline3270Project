@@ -225,7 +225,7 @@ public class StartingPanel extends Application {
 
 		btCreate = new Button("Create");
 		btCreate.setOnAction(e-> {
-			regiInput(usnText.getText(),pswText.getText(),fnText.getText(),
+			regiInput(usnText1.getText(),pswText1.getText(),fnText.getText(),
 					lnText.getText(),emText.getText(),addText.getText(),zipText.getText(),
 					stateText.getText(), ssnText.getText(), sqText.getText(), saText.getText());
 			regiConfirm.setText("User has been registered.");

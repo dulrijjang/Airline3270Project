@@ -68,6 +68,8 @@ public class StartingPanel extends Application {
 	Label securityQ;
 	Label securityA;
 
+	Label regiConfirm;
+
 	TextField usnText1;
 	TextField pswText1;
 	TextField fnText;
@@ -185,14 +187,14 @@ public class StartingPanel extends Application {
 		securityQ.setStyle("-fx-text-fill: Black;");
 		sqText = new TextField();
 		sqText.setPromptText("ex: What is the name of your college");
-		sqText.setPrefSize(600,25);
+		sqText.setPrefSize(300,25);
 
 		securityA = new Label("Security Answer:");
 		securityA.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
 		securityA.setStyle("-fx-text-fill: Black;");
 		saText = new TextField();
 		saText.setPromptText("ex: Georgia State University");
-		saText.setPrefSize(600,25);
+		saText.setPrefSize(300,25);
 
 		btLogin = new Button("Login");
 		btLogin.setOnAction(e-> {
@@ -222,9 +224,12 @@ public class StartingPanel extends Application {
 		});
 
 		btCreate = new Button("Create");
-		btCreate.setOnAction(e-> regiInput(usnText.getText(),pswText.getText(),fnText.getText(),
-				lnText.getText(),emText.getText(),addText.getText(),zipText.getText(),
-				stateText.getText(), ssnText.getText(), sqText.getText(), saText.getText()));
+		btCreate.setOnAction(e-> {
+			regiInput(usnText.getText(),pswText.getText(),fnText.getText(),
+					lnText.getText(),emText.getText(),addText.getText(),zipText.getText(),
+					stateText.getText(), ssnText.getText(), sqText.getText(), saText.getText());
+			regiConfirm.setText("User has been registered.");
+		});
 
 		btBack = new Button("Back");
 		btBack.setOnAction(e-> {
@@ -273,6 +278,10 @@ public class StartingPanel extends Application {
 		log.setLeftAnchor(boboLogo, 225.0);
 		loginScene = new Scene(log, 650, 400);
 		window.setResizable(false);
+
+		regiConfirm = new Label();
+		regiConfirm.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		regiConfirm.setStyle("-fx-text-fill: Green;");
 
 		Pane regisLayout = new Pane();
 		username1.setLayoutX(5);
@@ -323,10 +332,13 @@ public class StartingPanel extends Application {
 		btCreate.setLayoutY(300);
 		btBack.setLayoutX(150);
 		btBack.setLayoutY(300);
+		regiConfirm.setLayoutX(150);
+		regiConfirm.setLayoutY(350);
+
 		regisLayout.getChildren().addAll(username1,usnText1,password1,pswText1,firstName,fnText,lastName,
 				lnText,email,emText,address,addText,zip,zipText,state,stateText,ssn,ssnText,securityQ,
-				sqText,securityA,saText,btCreate,btBack);
-		regScene = new Scene(regisLayout, 800, 800);
+				sqText,securityA,saText,btCreate,btBack,regiConfirm);
+		regScene = new Scene(regisLayout, 500, 400);
 
 		window.setScene(loginScene);
 		window.show();
@@ -505,7 +517,5 @@ public class StartingPanel extends Application {
 
 		return c1.getPassword();
 	}
-
-
 
 }

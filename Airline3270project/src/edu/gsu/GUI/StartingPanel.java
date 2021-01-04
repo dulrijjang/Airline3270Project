@@ -247,9 +247,8 @@ public class StartingPanel extends Application {
 
 		btBack = new Button("Back");
 		btBack.setOnAction(e-> {
-
 			window.setScene(loginScene);
-
+			regiConfirm.setText("");
 		});
 
 		Pane loginLayout = new Pane();
@@ -298,56 +297,56 @@ public class StartingPanel extends Application {
 
 
 		Pane regisLayout = new Pane();
-		username1.setLayoutX(5);
-		username1.setLayoutY(5);
-		usnText1.setLayoutX(150);
-		usnText1.setLayoutY(0);
-		password1.setLayoutX(5);
-		password1.setLayoutY(35);
-		pswText1.setLayoutX(150);
-		pswText1.setLayoutY(30);
-		firstName.setLayoutX(5);
-		firstName.setLayoutY(65);
-		fnText.setLayoutX(150);
-		fnText.setLayoutY(60);
-		lastName.setLayoutX(5);
-		lastName.setLayoutY(95);
-		lnText.setLayoutX(150);
-		lnText.setLayoutY(90);
-		email.setLayoutX(5);
-		email.setLayoutY(125);
-		emText.setLayoutX(150);
-		emText.setLayoutY(120);
-		address.setLayoutX(5);
-		address.setLayoutY(155);
-		addText.setLayoutX(150);
-		addText.setLayoutY(150);
-		zip.setLayoutX(5);
-		zip.setLayoutY(185);
-		zipText.setLayoutX(150);
-		zipText.setLayoutY(180);
-		state.setLayoutX(330);
-		state.setLayoutY(185);
-		stateText.setLayoutX(375);
-		stateText.setLayoutY(180);
-		ssn.setLayoutX(5);
-		ssn.setLayoutY(215);
-		ssnText.setLayoutX(150);
-		ssnText.setLayoutY(210);
-		securityQ.setLayoutX(5);
-		securityQ.setLayoutY(245);
-		sqText.setLayoutX(150);
-		sqText.setLayoutY(240);
-		securityA.setLayoutX(5);
-		securityA.setLayoutY(275);
-		saText.setLayoutX(150);
-		saText.setLayoutY(270);
-		btCreate.setLayoutX(100);
+		username1.setLayoutX(20);
+		username1.setLayoutY(15);
+		usnText1.setLayoutX(165);
+		usnText1.setLayoutY(10);
+		password1.setLayoutX(20);
+		password1.setLayoutY(45);
+		pswText1.setLayoutX(165);
+		pswText1.setLayoutY(40);
+		firstName.setLayoutX(20);
+		firstName.setLayoutY(75);
+		fnText.setLayoutX(165);
+		fnText.setLayoutY(70);
+		lastName.setLayoutX(20);
+		lastName.setLayoutY(105);
+		lnText.setLayoutX(165);
+		lnText.setLayoutY(100);
+		email.setLayoutX(20);
+		email.setLayoutY(135);
+		emText.setLayoutX(165);
+		emText.setLayoutY(130);
+		address.setLayoutX(20);
+		address.setLayoutY(165);
+		addText.setLayoutX(165);
+		addText.setLayoutY(160);
+		zip.setLayoutX(20);
+		zip.setLayoutY(195);
+		zipText.setLayoutX(165);
+		zipText.setLayoutY(190);
+		state.setLayoutX(345);
+		state.setLayoutY(195);
+		stateText.setLayoutX(390);
+		stateText.setLayoutY(190);
+		ssn.setLayoutX(20);
+		ssn.setLayoutY(225);
+		ssnText.setLayoutX(165);
+		ssnText.setLayoutY(220);
+		securityQ.setLayoutX(20);
+		securityQ.setLayoutY(255);
+		sqText.setLayoutX(165);
+		sqText.setLayoutY(250);
+		securityA.setLayoutX(20);
+		securityA.setLayoutY(285);
+		saText.setLayoutX(165);
+		saText.setLayoutY(280);
+		btCreate.setLayoutX(195);
 		btCreate.setLayoutY(320);
-		btBack.setLayoutX(180);
+		btBack.setLayoutX(275);
 		btBack.setLayoutY(320);
-		regiConfirm.setLayoutX(150);
-		regiConfirm.setLayoutY(360);
+		regiConfirm.setLayoutX(190);
+		regiConfirm.setLayoutY(370);
 
 		regisLayout.setStyle("-fx-background-color: #BEE4FD");
 
@@ -453,28 +452,21 @@ public class StartingPanel extends Application {
 
 			//c1.setAction(Action.GET_FLIGHTS);
 
-			loginSuccess = PopUP.confirmation(c1);
+			Stage stage = (Stage) btLogin.getScene().getWindow();
 
-			if (loginSuccess) {
+			stage.close();
 
-				Stage stage = (Stage) btLogin.getScene().getWindow();
-
-				stage.close();
-
-				AccountPanel ap = new AccountPanel(c1);
-				try {
-					ap.start(new Stage());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
+			AccountPanel ap = new AccountPanel(c1);
+			try {
+				ap.start(new Stage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		}
 
 	}
-
 
 	public void regiInput (String LoginID, String Password, String FirstName, String LastName, String Email, String Address, String ZipCode,
 						   String State, String SocialSecurity, String SecurityQuestion, String SecurityAnswer) {

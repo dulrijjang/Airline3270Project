@@ -3,8 +3,11 @@ package edu.gsu.db;
 import edu.gsu.common.Customer;
 import edu.gsu.common.Flight;
 import edu.gsu.exceptions.LoginException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class DBQuery {
@@ -18,15 +21,24 @@ public class DBQuery {
     private static String PSW = "Snowy26!";
     //"Xkwhdkf1@";
 
-    public static void login(Customer c1) throws Exception {
-
+    public static Connection getConnection() {
         Connection conn = null;
-
         try {
-
             Class.forName(DRIVER);
             conn = DriverManager.getConnection(URL, USN, PSW);
             System.out.println("Connected");
+            return conn;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    public static void login(Customer c1) throws Exception {
+
+        Connection conn = getConnection();
+
+        try {
+
 
             // Create a statement
             // PreparedStatement st  = conn.prepareStatement(Query.CREATE);
@@ -61,14 +73,10 @@ public class DBQuery {
 
     public static String royalty(Customer c1) throws Exception {
 
-        Connection conn = null;
+        Connection conn = getConnection();
         String royaltyNum = null;
 
         try {
-
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USN, PSW);
-            System.out.println("Connected");
 
             // Create a statement
             PreparedStatement ptmt = conn.prepareStatement(Query.ROYALTY_NUM);
@@ -94,43 +102,17 @@ public class DBQuery {
         }
     }
 
-    public static void getFlights(Customer c1) throws Exception {
-
-        // can I run a query on reservation table that select all teh rows with customerID comes from co
-
-        Flight f1 = new Flight();
-        f1.setAirline("a");
-
-        Flight f2 = new Flight();
-        f2.setAirline("b");
-
-        Flight f3 = new Flight();
-        f3.setAirline("c");
-
-        c1.getFlights().add(f1);
-        c1.getFlights().add(f2);
-        c1.getFlights().add(f3);
-
-    }
-
     public static void register(Customer c1) throws Exception {
 
 
-        Connection conn = null;
+        Connection conn = getConnection();
 
         try {
-
-            Class.forName(DRIVER);
-            System.out.println("driver found");
-
-            conn = DriverManager.getConnection(URL, USN, PSW);
-            System.out.println("Connected");
-
 
             // Create a statement
             PreparedStatement ptmt = conn.prepareStatement(Query.REGISTER);
 
-            ptmt.setString(1, c1.getRoyaltyNumber()); // royaltyNumber;
+            ptmt.setString(1, (Math.random() + "")); // royaltyNumber;
             ptmt.setString(2, c1.getFirstName()); // firstName;
             ptmt.setString(3, c1.getLastName()); // lastName;
             ptmt.setString(4, c1.getLoginID()); // loginID;
@@ -157,55 +139,12 @@ public class DBQuery {
 
     }
 
-    public static void forgot(Customer c1) throws Exception {
-
-        Connection conn = null;
-
-        try {
-
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USN, PSW);
-            System.out.println("Connected");
-
-            // Create a statement
-            PreparedStatement ptmt = conn.prepareStatement(Query.FORGOT);
-
-            ptmt.setString(1, c1.getLoginID());
-            ptmt.setString(2, c1.getSecurityQ());
-            ptmt.setString(3, c1.getSecurityA());
-
-            // Execute a statement
-            ResultSet rs1 = ptmt.executeQuery();
-
-            String psw;
-
-            // Iterate through the result and print the student names
-            while (rs1.next()) {
-                psw = rs1.getNString(1);
-                System.out.print(psw);
-            }
-
-
-        } catch (SQLException e) {
-
-            System.out.println(e);
-            throw e;
-        } finally {
-
-            conn.close();
-        }
-    }
-
     public static String question(Customer c1) throws Exception {
 
-        Connection conn = null;
+        Connection conn = getConnection();
         String securityq = null;
 
         try {
-
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USN, PSW);
-            System.out.println("Connected");
 
             // Create a statement
             PreparedStatement ptmt = conn.prepareStatement(Query.QUESTION);
@@ -233,14 +172,10 @@ public class DBQuery {
 
     public static String password(Customer c1) throws Exception {
 
-        Connection conn = null;
+        Connection conn = getConnection();
         String password1 = null;
 
         try {
-
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USN, PSW);
-            System.out.println("Connected");
 
             // Create a statement
             PreparedStatement ptmt = conn.prepareStatement(Query.FORGOT);
@@ -268,6 +203,63 @@ public class DBQuery {
         }
     }
 
+    public static ObservableList<Flight> getMyFlights(Customer c1) throws Exception {
+
+        Connection conn = getConnection();
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        Flight flight;
+
+        try {
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.MY_FLIGHTS);
+
+            ptmt.setString(1, c1.getRoyaltyNumber());
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                flight = new Flight(rs1.getNString("flightID"), rs1.getNString("airline"),
+                        rs1.getNString("depart"), rs1.getNString("arrive"),
+                        rs1.getNString("depTime"), rs1.getNString("arrTime"),
+                        rs1.getNString("depDate"));
+
+                flights.add(flight);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+        return flights;
+    }
+
+    public static void delete(Customer c1, Flight f1) throws Exception {
+        Connection conn = getConnection();
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(Query.SAFE_UPDATE_0);
+            ptmt.executeUpdate();
+
+            ptmt = conn.prepareStatement(Query.DELETE_FLIGHT);
+            ptmt.setString(1, c1.getRoyaltyNumber());
+            ptmt.setString(2, f1.getFlightID());
+            ptmt.executeUpdate();
+
+            ptmt = conn.prepareStatement(Query.SAFE_UPDATE_1);
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
 
     //  public static void search(Flight f1) throws Exception {
 

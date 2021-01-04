@@ -26,5 +26,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="JavaFX.11" level="application" />
+    <orderEntry type="library" name="MySQLConn" level="application" />
   </component>
 </module>

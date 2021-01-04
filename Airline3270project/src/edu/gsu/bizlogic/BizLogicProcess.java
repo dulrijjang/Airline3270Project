@@ -4,6 +4,10 @@ import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
 import edu.gsu.common.Flight;
 import edu.gsu.db.DBQuery;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 public class BizLogicProcess {
 
@@ -16,21 +20,10 @@ public class BizLogicProcess {
                 DBQuery.login(c1);
                 break;
 
-            case Action.GET_FLIGHTS:
-
-                DBQuery.getFlights(c1);
-                break;
-
             case Action.REGISTER:
 
                 DBQuery.register(c1);
                 break;
-
-            case Action.FORGOT:
-
-                DBQuery.forgot(c1);
-                break;
-
 
         }
 
@@ -49,13 +42,27 @@ public class BizLogicProcess {
                 break;
             case Action.ROYALTY_NUM:
                 statement = DBQuery.royalty(c1);
+                break;
+
         }
         return statement;
     }
 
-    public static void process2(Flight f1) throws Exception {
+    public static ObservableList<Flight> process3(Customer c1) throws Exception {
 
-        //DBQuery.search(f1);
+        ObservableList<Flight> flight = FXCollections.observableArrayList();
+
+        switch (c1.getAction()) {
+            case Action.GET_MY_FLIGHTS:
+                flight = DBQuery.getMyFlights(c1);
+                break;
+        }
+        return flight;
+    }
+
+    public static void process2(Customer c1, Flight f1) throws Exception {
+
+        DBQuery.delete(c1,f1);
 
     }
 

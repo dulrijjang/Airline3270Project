@@ -44,9 +44,19 @@ public class Query {
 					"WHERE id = ?";
 
 	public static final String MY_FLIGHTS =
-			"SELECT flights.flightID, planeNum, airline, depart, arrive, depTime, arrTime, depDate" +
-					"FROM flights JOIN regi ON flights.flightID = regi.flightID" +
-					"WHERE royaltynumber IN ('?')";
+			"SELECT flights.flightID, airline, depart, arrive, depTime, arrTime, depDate " +
+					"FROM flights JOIN tickets ON tickets.flightID = flights.flightID " +
+					"WHERE royaltynumber IN (?)";
+
+	public static final String DELETE_FLIGHT =
+			"DELETE FROM tickets " +
+					"WHERE (royaltynumber = ? AND flightID = ?)";
+
+	public static final String SAFE_UPDATE_0 =
+			"SET SQL_SAFE_UPDATES = 0";
+
+	public static final String SAFE_UPDATE_1 =
+			"SET SQL_SAFE_UPDATES = 1";
 
 	public static final String FLIGHT_DEPARTURE =
 			"SELECT * " +

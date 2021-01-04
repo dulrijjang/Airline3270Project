@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/**
 //book a new flight
 public class BookingPanel extends JPanel {
 
@@ -324,3 +324,4 @@ public class BookingPanel extends JPanel {
         }
     }
 }
+*/

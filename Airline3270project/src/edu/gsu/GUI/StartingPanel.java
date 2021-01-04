@@ -3,8 +3,10 @@ package edu.gsu.GUI;
 import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
-import edu.gsu.db.DBQuery;
 import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +17,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Random;
 
@@ -430,9 +433,12 @@ public class StartingPanel extends Application {
 			System.out.println("Successful Login!");
 
 			c1.setAction(Action.ROYALTY_NUM);
-			c1.setRoyaltyNumber(PopUP.findQ(c1));
+			c1.setRoyaltyNumber(PopUP.find(c1));
 
-			c1.setAction(Action.GET_FLIGHTS);
+			//c1.setAction(Action.GET_MY_FLIGHTS);
+			//c1.setFlights(PopUP.findFlight(c1));
+
+			//c1.setAction(Action.GET_FLIGHTS);
 
 			loginSuccess = PopUP.confirmation(c1);
 
@@ -443,18 +449,19 @@ public class StartingPanel extends Application {
 				stage.close();
 
 				AccountPanel ap = new AccountPanel(c1);
-
 				try {
 					ap.start(new Stage());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 
 		}
 
 	}
+
 
 	public void regiInput (String LoginID, String Password, String FirstName, String LastName, String Email, String Address, String ZipCode,
 						   String State, String SocialSecurity, String SecurityQuestion, String SecurityAnswer) {
@@ -498,9 +505,9 @@ public class StartingPanel extends Application {
 		c1.setAction(Action.FIND_QUESTION);
 
 		System.out.println("Customer: " + loginID);
-		System.out.println("Password: " + PopUP.findQ(c1));
+		System.out.println("Password: " + PopUP.find(c1));
 
-		c1.setSecurityQ(PopUP.findQ(c1));
+		c1.setSecurityQ(PopUP.find(c1));
 
 		return c1.getSecurityQ();
 
@@ -516,7 +523,7 @@ public class StartingPanel extends Application {
 
 		c1.setAction(Action.FIND_PASSWORD);
 
-		c1.setPassword(PopUP.findQ(c1));
+		c1.setPassword(PopUP.find(c1));
 
 		return c1.getPassword();
 	}

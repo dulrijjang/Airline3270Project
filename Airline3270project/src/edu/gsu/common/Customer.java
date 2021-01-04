@@ -1,7 +1,8 @@
 package edu.gsu.common;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Customer {
 
@@ -17,11 +18,10 @@ public class Customer {
     private String ssn;
     private String securityQ;
     private String securityA;
-    private ArrayList<Flight> flights;
+    private ObservableList<Flight> flights;
     private String action;
 
     public Customer() {
-        flights = new ArrayList<>();
     }
 
     public String getRoyaltyNumber() {
@@ -120,11 +120,11 @@ public class Customer {
         this.securityA = securityQ;
     }
 
-    public ArrayList<Flight> getFlights() {
+    public ObservableList<Flight> getFlights() {
         return flights;
     }
 
-    public void setFlights(ArrayList<Flight> flights) {
+    public void setFlights(ObservableList<Flight> flights) {
         this.flights = flights;
     }
 

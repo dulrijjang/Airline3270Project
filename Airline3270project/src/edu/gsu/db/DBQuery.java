@@ -294,28 +294,128 @@ public class DBQuery {
         return flights;
     }
 
-    public static ObservableList<Flight> searchFlights(Flight f1) throws Exception {
+    public static ObservableList<Flight> searchFlights
+            (String air, String dep, String arr, String depT, String depD) throws Exception {
 
         Connection conn = getConnection();
         ObservableList<Flight> flights = FXCollections.observableArrayList();
         Flight flight;
 
+        PreparedStatement ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH);
+
         try {
 
-            // Create a statement
-            PreparedStatement ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH);
-
-            ptmt.setString(1, (f1.getAirline() + "%"));
-            ptmt.setString(2, (f1.getDeparture() + "%"));
-            ptmt.setString(3, (f1.getArrival() + "%"));
-            ptmt.setString(4, (f1.getDepTime() + "%"));
-            ptmt.setString(5, (f1.getDepDate() + "%"));
-
+            if (air != null) { //air
+                ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR);
+                ptmt.setString(1, air);
+                if (dep != null) { //air dep
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP);
+                    ptmt.setString(2, dep);
+                    if (arr != null) { //air dep arr
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP_ARR);
+                        ptmt.setString(3, arr);
+                        if (depT != null) { //air dep arr depT
+                            ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP_ARR_TIME);
+                            ptmt.setString(4, depT);
+                            if (depD != null) { //air dep arr depT depD
+                                ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH);
+                                ptmt.setString(5, depD);
+                            }
+                        } else if (depD != null) { //air dep arr depD
+                            ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP_ARR_DATE);
+                            ptmt.setString(4, depD);
+                        }
+                    } else if (depT != null) { //air dep depT
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP_TIME);
+                        ptmt.setString(3, depT);
+                        if (depD != null) { //air dep depT depD
+                            ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP_TIME_DATE);
+                            ptmt.setString(4, depD);
+                        }
+                    } else if (depD != null) { //air dep depD
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DEP_DATE);
+                        ptmt.setString(3, depD);
+                    }
+                } else if (arr != null) { //air arr
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_ARR);
+                    ptmt.setString(2, arr);
+                    if (depT != null) { // air arr depT
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_ARR_TIME);
+                        ptmt.setString(3, depT);
+                        if (depD != null) { //air arr depT depD
+                            ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_ARR_TIME_DATE);
+                            ptmt.setString(4, depD);
+                        }
+                    } else if (depD != null) { //air arr depD
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_ARR_DATE);
+                        ptmt.setString(3, depD);
+                    }
+                } else if (depT != null) { // air depT
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_TIME);
+                    ptmt.setString(2, depT);
+                    if (depD != null) { //air depT depD
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_TIME_DATE);
+                        ptmt.setString(3, depD);
+                    }
+                } else if (depD != null) { // air depD
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_AIR_DATE);
+                    ptmt.setString(2, depD);
+                }
+            } else if (dep != null) { //dep
+                ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP);
+                ptmt.setString(1, dep);
+                if (arr != null) { //dep arr
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_ARR);
+                    ptmt.setString(2, arr);
+                    if (depT != null) { //dep arr depT
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_ARR_TIME);
+                        ptmt.setString(3, depT);
+                        if (depD != null){ //dep arr depT depD
+                            ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_ARR_TIME_DATE);
+                            ptmt.setString(4, depD);
+                        }
+                    } else if (depD != null) { //dep arr depD
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_ARR_DATE);
+                        ptmt.setString(3, depD);
+                    }
+                } else if (depT != null) { //dep depT
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_TIME);
+                    ptmt.setString(2, depT);
+                    if (depD != null) { //dep depT depD
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_TIME_DATE);
+                        ptmt.setString(3, depD);
+                    }
+                } else if (depD != null){ //dep depD
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DEP_DATE);
+                    ptmt.setString(2, depD);
+                }
+            } else  if (arr != null) { //arr
+                ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_ARR);
+                ptmt.setString(1, arr);
+                if (depT != null) { //arr depT
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_ARR_TIME);
+                    ptmt.setString(2, depT);
+                    if (depD != null){ //arr depT depD
+                        ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_ARR_TIME_DATE);
+                        ptmt.setString(3, depD);
+                    }
+                } else if (depD != null) { //arr depD
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_ARR_DATE);
+                    ptmt.setString(2, depD);
+                }
+            } else if (depT != null) { //depT
+                ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_TIME);
+                ptmt.setString(1, depT);
+                if (depD != null) { //depT depD
+                    ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_TIME_DATE);
+                    ptmt.setString(2, depD);
+                }
+            } else if (depD != null){ //depD
+                ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH_DATE);
+                ptmt.setString(1, depD);
+            }
 
             ResultSet rs1 = ptmt.executeQuery();
-
-
-
 
             while (rs1.next()) {
                 flight = new Flight(rs1.getNString("flightID"), rs1.getNString("airline"),

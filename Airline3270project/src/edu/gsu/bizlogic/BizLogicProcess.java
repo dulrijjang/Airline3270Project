@@ -64,10 +64,10 @@ public class BizLogicProcess {
         return flight;
     }
 
-    public static ObservableList<Flight> searching(Flight f1) throws Exception {
+    public static ObservableList<Flight> searching
+            (String air, String dep, String arr, String depT, String depD) throws Exception {
 
-        ObservableList<Flight> flight = FXCollections.observableArrayList();
-        flight = DBQuery.searchFlights(f1);
+        ObservableList<Flight> flight = DBQuery.searchFlights(air,dep,arr,depT,depD);
         return flight;
     }
 

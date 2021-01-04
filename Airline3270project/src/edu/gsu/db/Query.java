@@ -61,7 +61,157 @@ public class Query {
 	public static final String FLIGHT_SEARCH =
 			"SELECT * " +
 					"FROM flights " +
-					"WHERE (airline = ? OR depart = ? OR arrive = ? OR depTime = ? OR depDate = ?)";
+					"WHERE (airline = ? AND depart = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP_ARR =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ? AND arrive = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP_ARR_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ? AND arrive = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP_ARR_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ? AND arrive = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DEP_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depart = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_ARR =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND arrive = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_ARR_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND arrive = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_ARR_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_ARR_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND arrive = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_AIR_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (airline = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_ARR =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND arrive = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_ARR_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND arrive = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_ARR_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_ARR_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND arrive = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_DEP_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depart = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_ARR =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (arrive = ?)";
+
+	public static final String FLIGHT_SEARCH_ARR_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (arrive = ? AND depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_ARR_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (arrive = ? AND depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_ARR_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (arrive = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_TIME =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depTime = ?)";
+
+	public static final String FLIGHT_SEARCH_TIME_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depTime = ? AND depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_DATE =
+			"SELECT * " +
+					"FROM flights " +
+					"WHERE (depDate = ?)";
 
 	public static final String ALL_FLIGHTS =
 			"SELECT * " +

@@ -124,12 +124,13 @@ public class PopUP {
 
 	}
 
-	public static ObservableList<Flight> searching(Flight f1) {
+	public static ObservableList<Flight> searching
+			(String air, String dep, String arr, String depT, String depD) {
 
 		ObservableList<Flight> flights = FXCollections.observableArrayList();
 
 		try {
-			flights = BizLogicProcess.searching(f1);
+			flights = BizLogicProcess.searching(air, dep, arr, depT, depD);
 
 		}
 

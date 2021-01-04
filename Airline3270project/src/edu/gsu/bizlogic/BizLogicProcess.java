@@ -56,14 +56,27 @@ public class BizLogicProcess {
             case Action.GET_MY_FLIGHTS:
                 flight = DBQuery.getMyFlights(c1);
                 break;
+            case Action.ALL_FLIGHTS:
+                flight = DBQuery.getAllFlights();
+                break;
+
         }
         return flight;
     }
 
+    public static ObservableList<Flight> searching(Flight f1) throws Exception {
+
+        ObservableList<Flight> flight = FXCollections.observableArrayList();
+        flight = DBQuery.searchFlights(f1);
+        return flight;
+    }
+
     public static void process2(Customer c1, Flight f1) throws Exception {
-
         DBQuery.delete(c1,f1);
+    }
 
+    public static void book(Customer c1, Flight f1) throws Exception {
+        DBQuery.book(c1,f1);
     }
 
 }

@@ -13,9 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,6 +38,15 @@ public class AccountPanel extends Application {
 	private TableColumn<Flight, String> colArrTime;
 	private TableColumn<Flight, String> colDepDate;
 
+	private TableView<Flight> tvAllFlights;
+	private TableColumn<Flight, String> colAllFlightID;
+	private TableColumn<Flight, String> colAllAirline;
+	private TableColumn<Flight, String> colAllDepart;
+	private TableColumn<Flight, String> colAllArrive;
+	private TableColumn<Flight, String> colAllDepTime;
+	private TableColumn<Flight, String> colAllArrTime;
+	private TableColumn<Flight, String> colAllDepDate;
+
 	Scene acctScene;
 	Stage window;
 
@@ -41,56 +54,57 @@ public class AccountPanel extends Application {
 	Button delete;
 	Button update;
 
+	Label allFlights;
+	Button book;
+	Button showAll;
+	Button search;
+
+	Label labDep;
+	Label labArr;
+	Label labTime;
+	Label labAir;
+	Label labDepDate;
+
+	TextField depLocation;
+	TextField arrLocation;
+	TextField departHour;
+	TextField departMin;
+	ComboBox airline;
+	ComboBox departMo;
+	ComboBox departDay;
+	ComboBox departYear;
+	//new ComboBox(FXCollections.observableArrayList());
+
+	Button btLogout;
+
 	private Customer customer;
-	private Flight flight;
+	private Flight flight = new Flight();
 
 	public AccountPanel (Customer customer) {
-
 		this.customer = customer;
-
-
 	}
-
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		String airlines[] = { "","Delta", "American", "United", "EVA", "SouthWest" };
+		String months[] = { "","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		String days[] = { "","01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+				"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+				"21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		String years[] = { "","2021", "2022"};
+
 		window = primaryStage;
-		System.out.print(customer.getRoyaltyNumber());
+		window.setTitle("BoBo Booking (cust_no.: " + customer.getRoyaltyNumber() + ")");
+		window.setResizable(false);
+		window.setHeight(700);
+		window.setWidth(1250);
 
 		primaryStage.getTitle();
 
-		//ObservableList<Flight> flights = FXCollections.observableArrayList();
-		//ListView<String> listView = new ListView<>();
+		btLogout = new Button("LOGOUT");
+		btLogout.setOnAction(e -> logout());
 
-		//listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-		//for (int i = 0; i < customer.getFlights().size(); i++) {
-		//	listView.getItems().add(customer.getFlights().get(i).getAirline());
-		//}
-
-		//Button button = new Button("Read selected value");
-
-		//button.setOnAction(e -> {
-		//	ObservableList<Integer> selectedIndices = listView.getSelectionModel().getSelectedIndices();
-
-		//	for(Object o : selectedIndices){
-		//		System.out.println("Index = " + o + " (" + o.getClass() + ")");
-		//		System.out.println(listView.getItems().get((Integer)o));
-		//	}
-		//});
-
-		//VBox oldList = new VBox(listView, button);
-
-		//myFlights = new Label("My Flights");
-		//delete = new Button("Delete Flight");
-		//update = new Button("Update List");
-		//update.setOnAction(e -> refreshList(customer));
-		//Pane tickets = new Pane();
-		//tickets.getChildren().addAll(listView, myFlights, delete, update);
-
-		VBox labels = new VBox();
-		VBox searches = new VBox();
 		tvFlights = new TableView<>();
 		colFlightID = new TableColumn<>("Flight ID");
 		colAirline = new TableColumn<>("Airline");
@@ -102,6 +116,74 @@ public class AccountPanel extends Application {
 		tvFlights.getColumns().addAll(colFlightID,colAirline,colDepart,
 				colArrive,colDepTime,colArrTime,colDepDate);
 
+		tvAllFlights = new TableView<>();
+		colAllFlightID = new TableColumn<>("Flight ID");
+		colAllAirline = new TableColumn<>("Airline");
+		colAllDepart = new TableColumn<>("Depart. City");
+		colAllArrive = new TableColumn<>("Arrive City");
+		colAllDepTime = new TableColumn<>("Depart. Time");
+		colAllArrTime = new TableColumn<>("Arrive Time");
+		colAllDepDate = new TableColumn<>("Date");
+		tvAllFlights.getColumns().addAll(colAllFlightID,colAllAirline,colAllDepart,
+				colAllArrive,colAllDepTime,colAllArrTime,colAllDepDate);
+
+		myFlights = new Label("My Flights");
+		allFlights = new Label("Available Flights");
+
+		myFlights.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 18));
+		allFlights.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 18));
+
+		labDep = new Label("FROM:");
+		labArr = new Label("TO:");
+		labTime = new Label("AT:");
+		labAir = new Label("AIRLINE:");
+		labDepDate = new Label("DATE:");
+
+		labDep.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		labArr.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		labTime.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		labAir.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+		labDepDate.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
+
+		depLocation = new TextField();
+		depLocation.setPromptText("ex: NYC");
+		depLocation.setPrefSize(80,25);
+		arrLocation = new TextField();
+		arrLocation.setPromptText("ex: SFO");
+		arrLocation.setPrefSize(80,25);
+		departHour = new TextField();
+		departHour.setPromptText("HH");
+		departHour.setPrefSize(45,25);
+		departMin = new TextField();
+		departMin.setPromptText("MM");
+		departMin.setPrefSize(45,25);
+		airline = new ComboBox(FXCollections.observableArrayList(airlines));
+		airline.setPrefSize(150, 25);
+		departMo = new ComboBox(FXCollections.observableArrayList(months));
+		departMo.setPrefSize(75, 25);
+		departDay = new ComboBox(FXCollections.observableArrayList(days));
+		departDay.setPrefSize(75, 25);
+		departYear = new ComboBox(FXCollections.observableArrayList(years));
+		departYear.setPrefSize(100, 25);
+
+		search = new Button("Search");
+		search.setOnAction(e -> {
+			flight.setDeparture(depLocation.getText()+"");
+			flight.setArrival(arrLocation.getText()+"");
+			flight.setAirline(airline.getValue()+"");
+			flight.setDepDate(departMo.getValue()+"", departDay.getValue()+"", departYear.getValue()+"");
+			flight.setDepTime(departHour.getText()+"", departMin.getText()+"");
+
+			searching(flight);
+		});
+
+		book = new Button("Book");
+		book.setOnAction(e -> {
+			flight = tvAllFlights.getSelectionModel().getSelectedItem();
+			bookFlight(customer, flight);
+			showFlight(customer);
+		});
+
 		update = new Button("Update");
 		update.setOnAction(e -> showFlight(customer));
 
@@ -112,45 +194,116 @@ public class AccountPanel extends Application {
 			showFlight(customer);
 		});
 
-		AnchorPane acct = new AnchorPane(labels, searches, tvFlights, update, delete);
-		acct.setTopAnchor(tvFlights,5.0);
-		acct.setLeftAnchor(tvFlights,5.0);
+		showAll = new Button("Show All");
+		showAll.setOnAction(e -> showAll(customer));
+
+		HBox hSearch1 = new HBox();
+		hSearch1.getChildren().addAll(departMo, departDay, departYear);
+		hSearch1.setSpacing(5);
+
+		HBox hSearch2 = new HBox();
+		hSearch2.setSpacing(5);
+		hSearch2.getChildren().addAll(departHour, departMin);
+
+		HBox all = new HBox();
+		all.getChildren().addAll(labDep,depLocation,labArr,arrLocation,labAir,airline,labDepDate,hSearch1,labTime,hSearch2);
+		all.setSpacing(15);
+
+		/**
+		 VBox labels = new VBox();
+		 labels.getChildren().addAll(labDep, labArr, labAir, labDepDate, labTime);
+		 labels.setSpacing(15);
+		 labels.setStyle("-fx-text-fill: Black;");
+
+		 VBox searches = new VBox();
+		 searches.getChildren().addAll(depLocation, arrLocation, airline, hSearch1, hSearch2);
+		 searches.setSpacing(15);
+		 searches.setPrefSize(50,50);
+		 */
+		Pane acct = new Pane();
+
+		all.setLayoutX(60);
+		all.setLayoutY(175);
+/**		labels.setLayoutX(50);
+ labels.setLayoutY(25);
+ searches.setLayoutX(150);
+ searches.setLayoutY(25); */
+		search.setLayoutX(1100);
+		search.setLayoutY(175);
+		update.setLayoutX(475);
+		update.setLayoutY(220);
+		delete.setLayoutX(537);
+		delete.setLayoutY(220);
+		showAll.setLayoutX(1100);
+		showAll.setLayoutY(220);
+		book.setLayoutX(1170);
+		book.setLayoutY(220);
+		myFlights.setLayoutX(25);
+		myFlights.setLayoutY(220);
+		tvFlights.setLayoutX(25);
+		tvFlights.setLayoutY(250);
+		allFlights.setLayoutX(650);
+		allFlights.setLayoutY(220);
+		tvAllFlights.setLayoutX(650);
+		tvAllFlights.setLayoutY(250);
+		acct.getChildren().addAll(tvFlights, tvAllFlights, search, update, delete, showAll,
+				book, all, myFlights, allFlights, btLogout);
+
 		acctScene = new Scene(acct);
 		window.setScene(acctScene);
 
-		//Scene scene = new Scene(oldList, 300, 120);
-		//primaryStage.setScene(scene);
 		primaryStage.show();
 
 	}
 
-	public ObservableList<Flight> refreshList(Customer c1){
+	public ObservableList<Flight> searching(Flight f1){
 
-		c1.getRoyaltyNumber();
-		c1.setAction(Action.GET_MY_FLIGHTS);
+		ObservableList<Flight> flights = FXCollections.observableArrayList(PopUP.searching(f1));
 
-		ObservableList<Flight> flights = FXCollections.observableArrayList(PopUP.findFlight(c1));
-		c1.setFlights(flights);
+		try {
+
+			colAllFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
+			colAllAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
+			colAllDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
+			colAllArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
+			colAllDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
+			colAllArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
+			colAllDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
+
+			tvAllFlights.setItems(flights);
+		}
+
+		catch (Exception e) {
+
+			Alert a1 = new Alert(Alert.AlertType.ERROR);
+			a1.setTitle("Search Fail");
+			a1.setHeaderText("Search Fail, please try again");
+			a1.setContentText(e.getMessage());
+
+			a1.showAndWait();
+
+		}
+
 		return flights;
 
 	}
 
-	public ObservableList<Flight> showFlight2(Customer c1) {
+	public ObservableList<Flight> showAll(Customer c1) {
 
-		c1.setAction(Action.GET_MY_FLIGHTS);
+		c1.setAction(Action.ALL_FLIGHTS);
 		ObservableList<Flight> flights = PopUP.findFlight(c1);
 
 		try {
 
-			colFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
-			colAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
-			colDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
-			colArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
-			colDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
-			colArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
-			colDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
+			colAllFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
+			colAllAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
+			colAllDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
+			colAllArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
+			colAllDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
+			colAllArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
+			colAllDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
 
-			tvFlights.setItems(flights);
+			tvAllFlights.setItems(flights);
 		}
 
 		catch (Exception e) {
@@ -200,63 +353,25 @@ public class AccountPanel extends Application {
 	}
 
 	public void deleteFlight(Customer c1, Flight f1) {
-
 		PopUP.deleteFlight(c1,f1);
-
-
 	}
 
-	//public AccountPanel() {
+	public void bookFlight(Customer c1, Flight f1) {
+		PopUP.bookFlight(c1,f1);
+	}
 
-	// setPreferredSize(new Dimension(300, 200));
-	//  setBackground(Color.WHITE);
-	//  setLayout(null);
+	public void logout(){
+		Stage stage = (Stage) btLogout.getScene().getWindow();
 
-	//  booking = new JButton("Book a Flight");
-	//  reservation = new JButton("See Reserved Flights");
-	//  update = new JButton("Update a Flight");
+		stage.close();
 
-	//  booking.setBounds(20, 20, 260, 45);
-	//   add(booking);
-	//   booking.addActionListener(new AccountPanel.ButtonListener());
-
-	//  reservation.setBounds(20, 70, 260, 45);
-	//   add(reservation);
-	//   reservation.addActionListener(new AccountPanel.ButtonListener());
-
-	//   update.setBounds(20, 120, 260, 45);
-	//   add(update);
-	//   update.addActionListener(new AccountPanel.ButtonListener());
-	//}
-
-	// class ButtonListener implements ActionListener {
-
-	// @Override
-	//  public void actionPerformed(ActionEvent event) {
-
-	//     if(event.getSource() == booking) {
-
-	//         JFrame frame = new JFrame("BoBo Tour Bookings");
-	///         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-	//         BookingPanel panel = new BookingPanel();
-	///         frame.getContentPane().add(panel);
-	//         frame.pack();
-	//         frame.setVisible(true);
-
-	//     } else if (event.getSource() == reservation) {
-
-	//         JFrame frame = new JFrame("BoBo Tour Reservations");
-	//        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-	//        ReservationPanel panel = new ReservationPanel();
-	//        frame.getContentPane().add(panel);
-	//         frame.pack();
-	//         frame.setVisible(true);
-
-	//   } else if (event.getSource() == update) {
-
-	//    }
-
-	//  }
-	// }
+		StartingPanel start = new StartingPanel();
+		try {
+			start.start(new Stage());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

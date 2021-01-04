@@ -261,6 +261,98 @@ public class DBQuery {
         }
     }
 
+    public static ObservableList<Flight> getAllFlights() throws Exception {
+
+        Connection conn = getConnection();
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        Flight flight;
+
+        try {
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.ALL_FLIGHTS);
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                flight = new Flight(rs1.getNString("flightID"), rs1.getNString("airline"),
+                        rs1.getNString("depart"), rs1.getNString("arrive"),
+                        rs1.getNString("depTime"), rs1.getNString("arrTime"),
+                        rs1.getNString("depDate"));
+
+                flights.add(flight);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+        return flights;
+    }
+
+    public static ObservableList<Flight> searchFlights(Flight f1) throws Exception {
+
+        Connection conn = getConnection();
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        Flight flight;
+
+        try {
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH);
+
+            ptmt.setString(1, (f1.getAirline() + "%"));
+            ptmt.setString(2, (f1.getDeparture() + "%"));
+            ptmt.setString(3, (f1.getArrival() + "%"));
+            ptmt.setString(4, (f1.getDepTime() + "%"));
+            ptmt.setString(5, (f1.getDepDate() + "%"));
+
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+
+
+            while (rs1.next()) {
+                flight = new Flight(rs1.getNString("flightID"), rs1.getNString("airline"),
+                        rs1.getNString("depart"), rs1.getNString("arrive"),
+                        rs1.getNString("depTime"), rs1.getNString("arrTime"),
+                        rs1.getNString("depDate"));
+
+                flights.add(flight);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+        return flights;
+    }
+
+    public static void book(Customer c1, Flight f1) throws Exception {
+        Connection conn = getConnection();
+        try {
+            PreparedStatement ptmt = conn.prepareStatement(Query.BOOK_FLIGHT);
+            ptmt.setString(1, c1.getRoyaltyNumber());
+            ptmt.setString(2, f1.getFlightID());
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
+
     //  public static void search(Flight f1) throws Exception {
 
     //     Connection conn = null;

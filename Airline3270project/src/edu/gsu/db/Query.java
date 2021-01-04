@@ -58,39 +58,18 @@ public class Query {
 	public static final String SAFE_UPDATE_1 =
 			"SET SQL_SAFE_UPDATES = 1";
 
-	public static final String FLIGHT_DEPARTURE =
+	public static final String FLIGHT_SEARCH =
 			"SELECT * " +
 					"FROM flights " +
-					"WHERE departure = ?";
+					"WHERE (airline = ? OR depart = ? OR arrive = ? OR depTime = ? OR depDate = ?)";
 
-	public static final String FLIGHT_ARRIVAL =
+	public static final String ALL_FLIGHTS =
 			"SELECT * " +
-					"FROM flights " +
-					"WHERE arrival = ?";
+					"FROM flights ";
 
-	public static final String FLIGHT_MONTHS =
-			"SELECT * " +
-					"FROM flights " +
-					"WHERE months = ?";
-
-	public static final String FLIGHT_DATES =
-			"SELECT * " +
-					"FROM flights " +
-					"WHERE dates = ?";
-
-	public static final String FLIGHT_TIMES =
-			"SELECT * " +
-					"FROM flights " +
-					"WHERE times = ?";
-
-	public static final String FLIGHT_AIRLINE =
-			"SELECT * " +
-					"FROM flights " +
-					"WHERE airline = ?";
-
-	public static final String FLIGHT_FLIGHTID =
-			"SELECT * " +
-					"FROM flights " +
-					"WHERE flightID = ?";
+	public static final String BOOK_FLIGHT =
+			"INSERT INTO tickets "
+					+ "(royaltynumber, flightID) VALUES"
+					+ "(?, ?)";
 
 }

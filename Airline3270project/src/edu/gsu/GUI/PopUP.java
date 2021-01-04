@@ -107,4 +107,45 @@ public class PopUP {
 
 	}
 
+	public static void bookFlight(Customer c1, Flight f1) {
+		try {
+			BizLogicProcess.book(c1, f1);
+		}
+		catch (Exception e) {
+
+			Alert a1 = new Alert(AlertType.ERROR);
+			a1.setTitle("Add Fail");
+			a1.setHeaderText("Add Fail, please try again");
+			a1.setContentText(e.getMessage());
+
+			a1.showAndWait();
+
+		}
+
+	}
+
+	public static ObservableList<Flight> searching(Flight f1) {
+
+		ObservableList<Flight> flights = FXCollections.observableArrayList();
+
+		try {
+			flights = BizLogicProcess.searching(f1);
+
+		}
+
+		catch (Exception e) {
+
+			Alert a1 = new Alert(AlertType.ERROR);
+			a1.setTitle("Search Fail");
+			a1.setHeaderText("Search Fail, please try again");
+			a1.setContentText(e.getMessage());
+
+			a1.showAndWait();
+
+		}
+
+		return flights;
+
+	}
+
 }

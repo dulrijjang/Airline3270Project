@@ -228,10 +228,21 @@ public class StartingPanel extends Application {
 
 		btCreate = new Button("Create");
 		btCreate.setOnAction(e-> {
-			regiInput(usnText1.getText(),pswText1.getText(),fnText.getText(),
-					lnText.getText(),emText.getText(),addText.getText(),zipText.getText(),
-					stateText.getText(), ssnText.getText(), sqText.getText(), saText.getText());
-			regiConfirm.setText("User has been registered.");
+
+			if (usnText1.getText().isBlank() && pswText1.getText().isBlank() && fnText.getText().isBlank() &&
+					lnText.getText().isBlank() && emText.getText().isBlank() && addText.getText().isBlank() &&
+					zipText.getText().isBlank() && stateText.getText().isBlank() && ssnText.getText().isBlank() &&
+					sqText.getText().isBlank() && saText.getText().isBlank()) {
+				regiConfirm.setText("All fields required.");
+				regiConfirm.setStyle("-fx-text-fill: Red;");
+			} else {
+				regiInput(usnText1.getText(),pswText1.getText(),fnText.getText(),
+						lnText.getText(),emText.getText(),addText.getText(),zipText.getText(),
+						stateText.getText(), ssnText.getText(), sqText.getText(), saText.getText());
+				regiConfirm.setText("User has been registered.");
+				regiConfirm.setStyle("-fx-text-fill: Green;");
+
+			}
 		});
 
 		btBack = new Button("Back");
@@ -284,59 +295,61 @@ public class StartingPanel extends Application {
 
 		regiConfirm = new Label();
 		regiConfirm.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 14));
-		regiConfirm.setStyle("-fx-text-fill: Green;");
+
 
 		Pane regisLayout = new Pane();
 		username1.setLayoutX(5);
-		username1.setLayoutY(0);
+		username1.setLayoutY(5);
 		usnText1.setLayoutX(150);
 		usnText1.setLayoutY(0);
 		password1.setLayoutX(5);
-		password1.setLayoutY(30);
+		password1.setLayoutY(35);
 		pswText1.setLayoutX(150);
 		pswText1.setLayoutY(30);
 		firstName.setLayoutX(5);
-		firstName.setLayoutY(60);
+		firstName.setLayoutY(65);
 		fnText.setLayoutX(150);
 		fnText.setLayoutY(60);
 		lastName.setLayoutX(5);
-		lastName.setLayoutY(90);
+		lastName.setLayoutY(95);
 		lnText.setLayoutX(150);
 		lnText.setLayoutY(90);
 		email.setLayoutX(5);
-		email.setLayoutY(120);
+		email.setLayoutY(125);
 		emText.setLayoutX(150);
 		emText.setLayoutY(120);
 		address.setLayoutX(5);
-		address.setLayoutY(150);
+		address.setLayoutY(155);
 		addText.setLayoutX(150);
 		addText.setLayoutY(150);
 		zip.setLayoutX(5);
-		zip.setLayoutY(180);
+		zip.setLayoutY(185);
 		zipText.setLayoutX(150);
 		zipText.setLayoutY(180);
 		state.setLayoutX(330);
-		state.setLayoutY(180);
+		state.setLayoutY(185);
 		stateText.setLayoutX(375);
 		stateText.setLayoutY(180);
 		ssn.setLayoutX(5);
-		ssn.setLayoutY(210);
+		ssn.setLayoutY(215);
 		ssnText.setLayoutX(150);
 		ssnText.setLayoutY(210);
 		securityQ.setLayoutX(5);
-		securityQ.setLayoutY(240);
+		securityQ.setLayoutY(245);
 		sqText.setLayoutX(150);
 		sqText.setLayoutY(240);
 		securityA.setLayoutX(5);
-		securityA.setLayoutY(270);
+		securityA.setLayoutY(275);
 		saText.setLayoutX(150);
 		saText.setLayoutY(270);
-		btCreate.setLayoutX(50);
-		btCreate.setLayoutY(300);
-		btBack.setLayoutX(150);
-		btBack.setLayoutY(300);
+		btCreate.setLayoutX(100);
+		btCreate.setLayoutY(320);
+		btBack.setLayoutX(180);
+		btBack.setLayoutY(320);
 		regiConfirm.setLayoutX(150);
-		regiConfirm.setLayoutY(350);
+		regiConfirm.setLayoutY(360);
+
+		regisLayout.setStyle("-fx-background-color: #BEE4FD");
 
 		regisLayout.getChildren().addAll(username1,usnText1,password1,pswText1,firstName,fnText,lastName,
 				lnText,email,emText,address,addText,zip,zipText,state,stateText,ssn,ssnText,securityQ,

@@ -70,7 +70,6 @@ public class AccountPanel extends Application {
 	TextField depLocation;
 	TextField arrLocation;
 	TextField departHour;
-	TextField departMin;
 	ComboBox airline;
 	ComboBox departMo;
 	ComboBox departDay;
@@ -89,12 +88,12 @@ public class AccountPanel extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		String airlines[] = { "","Delta", "American", "United", "EVA", "SouthWest" };
-		String months[] = { "","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-		String days[] = { "","01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+		String airlines[] = { null,"Delta", "American", "United", "EVA", "SouthWest" };
+		String months[] = { null,"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		String days[] = { null,"01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
 				"11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
 				"21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
-		String years[] = { "","2021", "2022"};
+		String years[] = { null,"2021", "2022"};
 
 		window = primaryStage;
 		window.setTitle("BoBo Booking (cust_no.: " + customer.getRoyaltyNumber() + ")");
@@ -165,9 +164,6 @@ public class AccountPanel extends Application {
 		departHour = new TextField();
 		departHour.setPromptText("HH");
 		departHour.setPrefSize(45,25);
-		departMin = new TextField();
-		departMin.setPromptText("MM");
-		departMin.setPrefSize(45,25);
 		airline = new ComboBox(FXCollections.observableArrayList(airlines));
 		airline.setPrefSize(150, 25);
 		departMo = new ComboBox(FXCollections.observableArrayList(months));
@@ -179,31 +175,43 @@ public class AccountPanel extends Application {
 
 		search = new Button("Search");
 		search.setOnAction(e -> {
-			String air = null;
-			String dep = null;
-			String arr = null;
-			String depT = null;
-			String depD = null;
+			String air;
+			String dep;
+			String arr;
+			String depT;
+			String depD;
 			//flight.setDeparture(depLocation.getText()+"");
 			//flight.setArrival(arrLocation.getText()+"");
 			//flight.setAirline(airline.getValue()+"");
 			//flight.setDepDate(departMo.getValue()+"", departDay.getValue()+"", departYear.getValue()+"");
 			//flight.setDepTime(departHour.getText()+"", departMin.getText()+"");
-			if (airline.getValue() != null)
-				air = (String) airline.getValue();
+			if (airline.getSelectionModel().isEmpty())
+				air = null;
+			else
+				air = (String) airline.getSelectionModel().getSelectedItem();
 
-			if (depLocation.getText() != null)
+			if (depLocation.getText().isBlank())
+				dep = null;
+			else
 				dep = depLocation.getText();
 
-			if (arrLocation.getText() != null)
+			if (arrLocation.getText().isBlank())
+				arr = null;
+			else
 				arr =  arrLocation.getText();
 
-			if (departMo.getValue() != null){
+			if (departMo.getValue() == null || departDay.getValue() == null || departYear.getValue() == null) {
+				depD = null;
+			} else {
+				depD = departMo.getValue() + "/" + departDay.getValue() + "/" + departYear.getValue();
+			}
+
+			/*if (departMo.getValue() != null){
 				depD = (String) departMo.getValue();
 				if (departDay.getValue() != null){
-					depD = depD + "/" + (String) departDay.getValue();
+					depD = depD + "/" + departDay.getValue();
 					if (departYear.getValue() != null) {
-						depD += depD + "/" + (String) departYear.getValue();
+						depD += depD + "/" + departYear.getValue();
 					} else {
 						depD += "%";
 					}
@@ -211,25 +219,20 @@ public class AccountPanel extends Application {
 					depD += "%";
 				}
 			} else if (departDay.getValue() != null) {
-				depD = "%" + (String) departDay.getValue();
+				depD = "%" + departDay.getValue();
 				if (departYear.getValue() != null) {
-					depD += depD + "/" + (String) departYear.getValue();
+					depD += depD + "/" + departYear.getValue();
 				} else {
 					depD += "%";
 				}
 			} else if (departYear.getValue() != null){
-				depD = "%" + (String) departYear.getValue();
-			}
+				depD = "%" + departYear.getValue();
+			}*/
 
-			if (departHour.getText() != null) {
+			if (departHour.getText().isBlank())
+				depT = null;
+			else
 				depT = departHour.getText();
-				if (departMin.getText() != null) {
-					depT += ":" + departMin.getText();
-				} else
-					depT += "%";
-			} else if (departMin.getText() != null) {
-				depT = "%" + departMin.getText();
-			}
 
 			searching(air,dep,arr,depT,depD);
 		});
@@ -260,7 +263,7 @@ public class AccountPanel extends Application {
 
 		HBox hSearch2 = new HBox();
 		hSearch2.setSpacing(5);
-		hSearch2.getChildren().addAll(departHour, departMin);
+		hSearch2.getChildren().addAll(departHour);
 
 		HBox all = new HBox();
 		all.getChildren().addAll(labDep,depLocation,labArr,arrLocation,labAir,airline,labDepDate,hSearch1,labTime,hSearch2);

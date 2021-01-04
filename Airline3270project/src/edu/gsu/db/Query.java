@@ -63,7 +63,13 @@ public class Query {
 					"FROM flights " +
 					"WHERE (airline = ? AND depart = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
 
-	public static final String FLIGHT_SEARCH_AIR =
+	/**
+	 * 	public static final String FLIGHT_SEARCH =
+	 *             "SELECT * " +
+	 *                     "FROM flights " +
+	 *                     "WHERE (airline = ? AND depart = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
+	 *
+	 */ public static final String FLIGHT_SEARCH_AIR =
 			"SELECT * " +
 					"FROM flights " +
 					"WHERE (airline = ?)";
@@ -212,6 +218,9 @@ public class Query {
 			"SELECT * " +
 					"FROM flights " +
 					"WHERE (depDate = ?)";
+
+	public static final String FLIGHT_SEARCH_NULL =
+			"SELECT * FROM flights";
 
 	public static final String ALL_FLIGHTS =
 			"SELECT * " +

@@ -68,6 +68,10 @@ public class BizLogicProcess {
             (String air, String dep, String arr, String depT, String depD) throws Exception {
 
         ObservableList<Flight> flight = DBQuery.searchFlights(air,dep,arr,depT,depD);
+
+
+
+
         return flight;
     }
 

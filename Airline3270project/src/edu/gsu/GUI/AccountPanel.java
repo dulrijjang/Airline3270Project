@@ -7,8 +7,6 @@ import edu.gsu.common.Flight;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,12 +15,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 
 public class AccountPanel extends Application {
 
@@ -180,11 +172,7 @@ public class AccountPanel extends Application {
 			String arr;
 			String depT;
 			String depD;
-			//flight.setDeparture(depLocation.getText()+"");
-			//flight.setArrival(arrLocation.getText()+"");
-			//flight.setAirline(airline.getValue()+"");
-			//flight.setDepDate(departMo.getValue()+"", departDay.getValue()+"", departYear.getValue()+"");
-			//flight.setDepTime(departHour.getText()+"", departMin.getText()+"");
+
 			if (airline.getSelectionModel().isEmpty())
 				air = null;
 			else
@@ -205,29 +193,6 @@ public class AccountPanel extends Application {
 			} else {
 				depD = departMo.getValue() + "/" + departDay.getValue() + "/" + departYear.getValue();
 			}
-
-			/*if (departMo.getValue() != null){
-				depD = (String) departMo.getValue();
-				if (departDay.getValue() != null){
-					depD = depD + "/" + departDay.getValue();
-					if (departYear.getValue() != null) {
-						depD += depD + "/" + departYear.getValue();
-					} else {
-						depD += "%";
-					}
-				} else {
-					depD += "%";
-				}
-			} else if (departDay.getValue() != null) {
-				depD = "%" + departDay.getValue();
-				if (departYear.getValue() != null) {
-					depD += depD + "/" + departYear.getValue();
-				} else {
-					depD += "%";
-				}
-			} else if (departYear.getValue() != null){
-				depD = "%" + departYear.getValue();
-			}*/
 
 			if (departHour.getText().isBlank())
 				depT = null;
@@ -269,25 +234,11 @@ public class AccountPanel extends Application {
 		all.getChildren().addAll(labDep,depLocation,labArr,arrLocation,labAir,airline,labDepDate,hSearch1,labTime,hSearch2);
 		all.setSpacing(15);
 
-		/**
-		 VBox labels = new VBox();
-		 labels.getChildren().addAll(labDep, labArr, labAir, labDepDate, labTime);
-		 labels.setSpacing(15);
-		 labels.setStyle("-fx-text-fill: Black;");
-
-		 VBox searches = new VBox();
-		 searches.getChildren().addAll(depLocation, arrLocation, airline, hSearch1, hSearch2);
-		 searches.setSpacing(15);
-		 searches.setPrefSize(50,50);
-		 */
 		Pane acct = new Pane();
 
 		all.setLayoutX(60);
 		all.setLayoutY(75);
-/**		labels.setLayoutX(50);
- labels.setLayoutY(25);
- searches.setLayoutX(150);
- searches.setLayoutY(25); */
+
 		search.setLayoutX(1100);
 		search.setLayoutY(75);
 		update.setLayoutX(475);

@@ -4,9 +4,6 @@ import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
 import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -446,11 +443,6 @@ public class StartingPanel extends Application {
 
 			c1.setAction(Action.ROYALTY_NUM);
 			c1.setRoyaltyNumber(PopUP.find(c1));
-
-			//c1.setAction(Action.GET_MY_FLIGHTS);
-			//c1.setFlights(PopUP.findFlight(c1));
-
-			//c1.setAction(Action.GET_FLIGHTS);
 
 			Stage stage = (Stage) btLogin.getScene().getWindow();
 

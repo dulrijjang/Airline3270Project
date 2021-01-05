@@ -1,6 +1,5 @@
 package edu.gsu.GUI;
 
-import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Customer;
 import edu.gsu.common.Action;
 import edu.gsu.common.Flight;
@@ -154,7 +153,7 @@ public class AccountPanel extends Application {
 		arrLocation.setPromptText("ex: SFO");
 		arrLocation.setPrefSize(80,25);
 		departHour = new TextField();
-		departHour.setPromptText("HH");
+		departHour.setPromptText("hr");
 		departHour.setPrefSize(45,25);
 		airline = new ComboBox(FXCollections.observableArrayList(airlines));
 		airline.setPrefSize(150, 25);
@@ -197,7 +196,7 @@ public class AccountPanel extends Application {
 			if (departHour.getText().isBlank())
 				depT = null;
 			else
-				depT = departHour.getText();
+				depT = departHour.getText()+"%";
 
 			searching(air,dep,arr,depT,depD);
 		});

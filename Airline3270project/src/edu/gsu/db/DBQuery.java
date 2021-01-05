@@ -7,8 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.ArrayList;
-
 
 public class DBQuery {
 
@@ -92,6 +90,68 @@ public class DBQuery {
             }
 
             return royaltyNum;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
+
+    public static String first(Customer c1) throws Exception {
+
+        Connection conn = getConnection();
+        String firstN = null;
+
+        try {
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.FIRST_NAME);
+
+            ptmt.setString(1, c1.getLoginID());
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                firstN = rs1.getNString(1);
+                c1.setSecurityQ(firstN);
+            }
+
+            return firstN;
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            throw e;
+
+        } finally {
+            conn.close();
+        }
+    }
+
+    public static String last(Customer c1) throws Exception {
+
+        Connection conn = getConnection();
+        String lastN = null;
+
+        try {
+
+            // Create a statement
+            PreparedStatement ptmt = conn.prepareStatement(Query.LAST_NAME);
+
+            ptmt.setString(1, c1.getLoginID());
+
+            ResultSet rs1 = ptmt.executeQuery();
+
+
+            while (rs1.next()) {
+                lastN = rs1.getNString(1);
+                c1.setSecurityQ(lastN);
+            }
+
+            return lastN;
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -304,17 +364,6 @@ public class DBQuery {
         PreparedStatement ptmt = conn.prepareStatement(Query.FLIGHT_SEARCH);
         ResultSet rs1 = null;
 
-        String master = Query.FLIGHT_SEARCH;
-        String target = "+ ?";
-        String notClause = "IS NOT NULL";
-        String editSearch = Query.FLIGHT_SEARCH;
-
-        int air1 = 0;
-        int dep2 = 0;
-        int arr3 = 0;
-        int depT4 = 0;
-        int depD5 = 0;
-
         try {
 
             if (air == null && dep == null && arr == null && depT == null && depD == null) {
@@ -478,8 +527,7 @@ public class DBQuery {
                 ptmt.setString(1, depD);
             }
 
-
-           rs1 = ptmt.executeQuery();
+      rs1 = ptmt.executeQuery();
             while (rs1.next()) {
                 flight = new Flight(rs1.getNString("flightID"), rs1.getNString("airline"),
                         rs1.getNString("depart"), rs1.getNString("arrive"),
@@ -515,5 +563,4 @@ public class DBQuery {
             conn.close();
         }
     }
-
 }

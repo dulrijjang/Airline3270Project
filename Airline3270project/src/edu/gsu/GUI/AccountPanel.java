@@ -3,6 +3,7 @@ package edu.gsu.GUI;
 import edu.gsu.common.Customer;
 import edu.gsu.common.Action;
 import edu.gsu.common.Flight;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,6 +43,8 @@ public class AccountPanel extends Application {
 
 	Scene acctScene;
 	Stage window;
+
+	Label user;
 
 	Label myFlights;
 	Button delete;
@@ -119,12 +122,15 @@ public class AccountPanel extends Application {
 		tvAllFlights.getColumns().addAll(colAllFlightID,colAllAirline,colAllDepart,
 				colAllArrive,colAllDepTime,colAllArrTime,colAllDepDate);
 
+		user = new Label("HELLO " + customer.getLastName() + ", " + customer.getFirstName() + "!");
 		myFlights = new Label("My Flights");
 		allFlights = new Label("Available Flights");
 
+		user.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 24));
 		myFlights.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 20));
 		allFlights.setFont(Font.font(STYLESHEET_CASPIAN, FontWeight.BOLD, 20));
 
+		user.setStyle("-fx-text-fill: White;");
 		myFlights.setStyle("-fx-text-fill: White;");
 		allFlights.setStyle("-fx-text-fill: White;");
 
@@ -256,8 +262,12 @@ public class AccountPanel extends Application {
 		allFlights.setLayoutY(120);
 		tvAllFlights.setLayoutX(650);
 		tvAllFlights.setLayoutY(150);
+		btLogout.setLayoutX(1150);
+		btLogout.setLayoutY(25);
+		user.setLayoutX(25);
+		user.setLayoutY(20);
 		acct.getChildren().addAll(tvFlights, tvAllFlights, search, update, delete, showAll,
-				book, all, myFlights, allFlights, btLogout);
+				book, all, myFlights, allFlights, btLogout, user);
 		acct.setBackground(bg);
 		acctScene = new Scene(acct);
 		window.setScene(acctScene);

@@ -22,6 +22,16 @@ public class Query {
 					+ "FROM regi "
 					+ "WHERE id = ?";
 
+	public static final String FIRST_NAME =
+			"SELECT firstname "
+					+ "FROM regi "
+					+ "WHERE id = ?";
+
+	public static final String LAST_NAME =
+			"SELECT lastname "
+					+ "FROM regi "
+					+ "WHERE id = ?";
+
 	public static final String LOGIN =
 			"SELECT count(*) as num  "
 					+ "FROM regi "
@@ -63,7 +73,13 @@ public class Query {
 					"FROM flights " +
 					"WHERE (airline = ? AND depart = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
 
-	public static final String FLIGHT_SEARCH_AIR =
+	/**
+	 * 	public static final String FLIGHT_SEARCH =
+	 *             "SELECT * " +
+	 *                     "FROM flights " +
+	 *                     "WHERE (airline = ? AND depart = ? AND arrive = ? AND depTime = ? AND depDate = ?)";
+	 *
+	 */ public static final String FLIGHT_SEARCH_AIR =
 			"SELECT * " +
 					"FROM flights " +
 					"WHERE (airline = ?)";

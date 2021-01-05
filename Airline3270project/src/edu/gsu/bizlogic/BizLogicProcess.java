@@ -43,6 +43,12 @@ public class BizLogicProcess {
             case Action.ROYALTY_NUM:
                 statement = DBQuery.royalty(c1);
                 break;
+            case Action.FIRST_NAME:
+                statement = DBQuery.first(c1);
+                break;
+            case Action.LAST_NAME:
+                statement = DBQuery.last(c1);
+                break;
 
         }
         return statement;
@@ -68,9 +74,6 @@ public class BizLogicProcess {
             (String air, String dep, String arr, String depT, String depD) throws Exception {
 
         ObservableList<Flight> flight = DBQuery.searchFlights(air,dep,arr,depT,depD);
-
-
-
 
         return flight;
     }

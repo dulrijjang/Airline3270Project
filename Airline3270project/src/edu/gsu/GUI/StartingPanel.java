@@ -3,6 +3,7 @@ package edu.gsu.GUI;
 import edu.gsu.bizlogic.BizLogicProcess;
 import edu.gsu.common.Action;
 import edu.gsu.common.Customer;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +15,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.util.Random;
 
@@ -443,6 +443,12 @@ public class StartingPanel extends Application {
 
 			c1.setAction(Action.ROYALTY_NUM);
 			c1.setRoyaltyNumber(PopUP.find(c1));
+
+			c1.setAction(Action.FIRST_NAME);
+			c1.setFirstName(PopUP.find(c1));
+
+			c1.setAction(Action.LAST_NAME);
+			c1.setLastName(PopUP.find(c1));
 
 			Stage stage = (Stage) btLogin.getScene().getWindow();
 

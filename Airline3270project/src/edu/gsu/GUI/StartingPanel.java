@@ -96,8 +96,6 @@ public class StartingPanel extends Application {
 
 	TextField answer;
 
-	public static void main(String[] args) { launch(args); }
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 

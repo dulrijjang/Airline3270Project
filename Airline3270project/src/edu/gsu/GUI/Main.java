@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.*;
 import javafx.util.Duration;
 
-public class SplashScreen extends Application {
+public class Main extends Application {
 
     public static final String SPLASH_IMAGE = "BoBoLogo.jpg";
 

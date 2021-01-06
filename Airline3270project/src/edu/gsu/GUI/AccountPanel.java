@@ -74,6 +74,7 @@ public class AccountPanel extends Application {
 
 	private Customer customer;
 	private Flight flight = new Flight();
+	private ObservableList<Flight> blank = FXCollections.observableArrayList();
 
 	public AccountPanel (Customer customer) {
 		this.customer = customer;
@@ -81,6 +82,8 @@ public class AccountPanel extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+
+		blank.add(new Flight("","","","","","",""));
 
 		String airlines[] = { null,"Delta", "American", "United", "EVA", "SouthWest" };
 		String months[] = { null,"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
@@ -108,8 +111,36 @@ public class AccountPanel extends Application {
 		colDepTime = new TableColumn<>("Depart. Time");
 		colArrTime = new TableColumn<>("Arrive Time");
 		colDepDate = new TableColumn<>("Date");
+
+		colFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
+		colAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
+		colDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
+		colArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
+		colDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
+		colArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
+		colDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
+
+		colFlightID.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.1));
+		colAirline.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.191));
+		colDepart.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colArrive.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colDepTime.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colArrTime.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colDepDate.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+
+		colFlightID.setResizable(false);
+		colAirline.setResizable(false);
+		colDepart.setResizable(false);
+		colArrive.setResizable(false);
+		colDepTime.setResizable(false);
+		colArrTime.setResizable(false);
+		colDepDate.setResizable(false);
+
 		tvFlights.getColumns().addAll(colFlightID,colAirline,colDepart,
 				colArrive,colDepTime,colArrTime,colDepDate);
+
+		tvFlights.setPrefWidth(575);
+		tvFlights.setItems(blank);
 
 		tvAllFlights = new TableView<>();
 		colAllFlightID = new TableColumn<>("Flight ID");
@@ -119,8 +150,36 @@ public class AccountPanel extends Application {
 		colAllDepTime = new TableColumn<>("Depart. Time");
 		colAllArrTime = new TableColumn<>("Arrive Time");
 		colAllDepDate = new TableColumn<>("Date");
+
+		colAllFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
+		colAllAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
+		colAllDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
+		colAllArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
+		colAllDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
+		colAllArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
+		colAllDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
+
+		colAllFlightID.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.1));
+		colAllAirline.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.191));
+		colAllDepart.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colAllArrive.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colAllDepTime.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colAllArrTime.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+		colAllDepDate.prefWidthProperty().bind(tvFlights.widthProperty().multiply(0.14));
+
+		colAllFlightID.setResizable(false);
+		colAllAirline.setResizable(false);
+		colAllDepart.setResizable(false);
+		colAllArrive.setResizable(false);
+		colAllDepTime.setResizable(false);
+		colAllArrTime.setResizable(false);
+		colAllDepDate.setResizable(false);
+
 		tvAllFlights.getColumns().addAll(colAllFlightID,colAllAirline,colAllDepart,
 				colAllArrive,colAllDepTime,colAllArrTime,colAllDepDate);
+
+		tvAllFlights.setPrefWidth(575);
+		tvAllFlights.setItems(blank);
 
 		user = new Label("HELLO " + customer.getLastName() + ", " + customer.getFirstName() + "!");
 		myFlights = new Label("My Flights");
@@ -246,21 +305,21 @@ public class AccountPanel extends Application {
 
 		search.setLayoutX(1100);
 		search.setLayoutY(75);
-		update.setLayoutX(475);
+		update.setLayoutX(488);
 		update.setLayoutY(120);
-		delete.setLayoutX(537);
+		delete.setLayoutX(550);
 		delete.setLayoutY(120);
-		showAll.setLayoutX(1100);
+		showAll.setLayoutX(1097);
 		showAll.setLayoutY(120);
-		book.setLayoutX(1170);
+		book.setLayoutX(1167);
 		book.setLayoutY(120);
 		myFlights.setLayoutX(25);
 		myFlights.setLayoutY(120);
 		tvFlights.setLayoutX(25);
 		tvFlights.setLayoutY(150);
-		allFlights.setLayoutX(650);
+		allFlights.setLayoutX(635);
 		allFlights.setLayoutY(120);
-		tvAllFlights.setLayoutX(650);
+		tvAllFlights.setLayoutX(635);
 		tvAllFlights.setLayoutY(150);
 		btLogout.setLayoutX(1150);
 		btLogout.setLayoutY(25);
@@ -279,18 +338,10 @@ public class AccountPanel extends Application {
 	public ObservableList<Flight> searching
 			(String air, String dep, String arr, String depT, String depD){
 
-		ObservableList<Flight> flights = PopUP.searching(air,dep,arr,depT,depD);
+		ObservableList<Flight> flights = FXCollections.observableArrayList();
 
 		try {
-
-			colAllFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
-			colAllAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
-			colAllDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
-			colAllArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
-			colAllDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
-			colAllArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
-			colAllDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
-
+			flights = PopUP.searching(air,dep,arr,depT,depD);
 			tvAllFlights.setItems(flights);
 		}
 
@@ -312,18 +363,10 @@ public class AccountPanel extends Application {
 	public ObservableList<Flight> showAll(Customer c1) {
 
 		c1.setAction(Action.ALL_FLIGHTS);
-		ObservableList<Flight> flights = PopUP.findFlight(c1);
+		ObservableList<Flight> flights = FXCollections.observableArrayList();
 
 		try {
-
-			colAllFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
-			colAllAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
-			colAllDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
-			colAllArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
-			colAllDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
-			colAllArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
-			colAllDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
-
+			flights = PopUP.findFlight(c1);
 			tvAllFlights.setItems(flights);
 		}
 
@@ -345,18 +388,9 @@ public class AccountPanel extends Application {
 	public void showFlight(Customer c1) {
 
 		c1.setAction(Action.GET_MY_FLIGHTS);
-		ObservableList<Flight> flights = PopUP.findFlight(c1);
 
 		try {
-
-			colFlightID.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightID"));
-			colAirline.setCellValueFactory(new PropertyValueFactory<Flight, String>("airline"));
-			colDepart.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
-			colArrive.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrival"));
-			colDepTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("depTime"));
-			colArrTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("arrTime"));
-			colDepDate.setCellValueFactory(new PropertyValueFactory<Flight, String>("depDate"));
-
+			ObservableList<Flight> flights = PopUP.findFlight(c1);
 			tvFlights.setItems(flights);
 		}
 
@@ -394,5 +428,4 @@ public class AccountPanel extends Application {
 			e.printStackTrace();
 		}
 	}
-
 }
